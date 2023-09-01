@@ -1,0 +1,39 @@
+<script src="/javascript/concerts.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/css/concerts.css" />
+
+<div>
+    <label for="bands">Vælg band:</label>
+    <select name="bands" id="bands">
+        <option value="">Se alle</option>
+        {{#each bands}}
+        <option value="{{name}}" id="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <label for="states">Vælg status:</label>
+    <select name="states" id="states">
+        <option value="">Se alle</option>
+        <option value="blyant" id="blyant">blyant</option>
+        <option value="confirmed" id="confirmed">confirmed</option>
+    </select>
+</div>
+<table class="concertTable" id="concertTable">
+    <tr>
+        <th>Dato</th>
+        <th>Band</th>
+        <th>Spillested</th>
+        <th>By</th>
+        <th>Status</th>
+    </tr>
+    {{#each concerts}}
+    <tr class="tourDays" id="{{_id}}">
+        <td>{{time.date}}</td>
+        <td>{{band.name}}</td>
+        <td>{{venue.name}}</td>
+        <td>{{venue.address.zipCodeAndCity}}</td>
+        <td>{{state}}</td>
+    </tr>
+    {{/each}}
+</table>
+
+<button id="createConcert">Opret koncert</button>
+

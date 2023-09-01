@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/css/tours.css" />
+<script src="/javascript/tours.js" defer></script>
+
+<div class="topthing">
+    <input type="text" id="nameInput" placeholder="Tour navn" required />
+    <select id="bandSelect" required>
+        <option value="">Vælg band</option>
+        {{#each bands}}
+        <option value="{{ _id }}">{{ name }}</option>
+        {{/each}}
+    </select>
+    <button id="createTour">Opret turné</button>
+</div>
+<table>
+    <tr>
+        <th>Tour navn</th>
+        <th>Band</th>
+        <th>Slet</th>
+    </tr>
+    {{#each tours}}
+    <tr id="{{ _id }}" class="tour">
+        <td>{{ name }}</td>
+        <td>{{ band.name }}</td>
+        <td class="remove">Slet</td>
+    </tr>
+    {{/each}}
+</table>

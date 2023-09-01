@@ -1,0 +1,10 @@
+<link rel="stylesheet" type="text/css" href="/css/promoters.css" />
+<script src="/javascript/promoters.js" defer></script>
+
+<div class="promoters">
+    {{#each promoters }}
+    {{> promoters/promoter . }}
+    {{/each}}
+    {{> promoters/promoter id="create-promoter"}}
+</div>
+<button id="create">Opret arrangør</button>

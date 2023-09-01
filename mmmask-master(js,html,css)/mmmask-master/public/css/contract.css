@@ -1,0 +1,167 @@
+.form {
+    /* padding: 2px; Gør at linjer ikke går helt ud til kanten i hver box */
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.form-single {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.border {
+    /* padding: 2px; Gør at linjer ikke går helt ud til kanten i hver box */
+    border: 2px solid black;
+    grid-template-columns: 50% 50%;
+    margin: 8px;
+}
+
+.top-border {
+    border-top: 2px solid black;
+}
+
+.top-border-small {
+    border-top: 2px solid black;
+}
+
+.bottom-border {
+    border-bottom: 2px solid black;
+}
+
+#contract-info {
+    width: 800px;
+}
+
+label {
+    font-weight: bold;
+    padding: 2px;
+}
+
+input {
+    border: none;
+    background-color: white;
+    padding: 2px;
+}
+
+textarea {
+    min-height: 3rem;
+    resize: none;
+    border-style: none;
+    border-color: Transparent;
+    overflow: auto;
+    background-color: white;
+    padding: 2px;
+}
+
+input:placeholder-shown,
+textarea:placeholder-shown {
+    font-style: italic;
+    opacity: 50%;
+}
+
+p {
+    margin: 0px;
+    padding: 2px;
+}
+
+select {
+    border: none;
+}
+
+img {
+    width: 216px;
+    height: 95px;
+    margin: 20px;
+}
+
+.printAdress {
+    margin: 10px;
+    text-align: center;
+    display: none;
+}
+
+.printInfo {
+    margin: 5px;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    font-style: italic;
+    display: none;
+}
+
+.printPayment {
+    margin: 10px;
+    text-align: center;
+    font-style: italic;
+    color: red;
+    font-family: sans-serif;
+    padding: 10px 10px 10px 10px;
+    display: none;
+}
+
+.declaration {
+    margin: 10px;
+    font-style: italic;
+    font-family: sans-serif;
+    padding: 10px 10px 10px 10px;
+}
+
+.printSignature {
+    display: none;
+}
+
+.signature {
+    margin: 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.line {
+    padding-top: 40px;
+}
+
+@media print {
+    .content {
+        display: inline;
+    }
+
+    .no-print,
+    nav {
+        display: none;
+    }
+
+    .border,
+    .printSignature {
+        page-break-before: auto;
+        page-break-after: auto;
+        page-break-inside: avoid;
+    }
+
+    :root {
+        --bg-alt-color: white;
+        --box-shadow: none;
+    }
+
+    .printAdress,
+    .printInfo,
+    .printPayment {
+        /* display: inline-block; */
+        display: inherit;
+    }
+
+    .printSignature {
+        display: grid;
+    }
+}
+
+@page {
+    size: A4;
+}
+
+@page: right {
+    @bottom-right {
+        content: counter(page);
+    }
+}
+
+button {
+    margin: 10px;
+}

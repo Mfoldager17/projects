@@ -1,0 +1,42 @@
+<table id="{{tableId}}">
+		<thead>
+			<tr>
+			<th>Navn</th>
+			<th>Vej</th>
+			<th>By</th>
+			<th>Vælg</th>
+			</tr>
+
+			<tr name="venue-content" data-id="" style="display:none">
+					<td class="venue"></td>
+					<td class="streetAndNumber"></td>
+					<td class="zipAndCity"></td>
+					<td class="action">
+						{{#if inTour}}
+							<button class="sendVenueButton">Send venue til koncert</button>
+							<button class="remove" id="{{ id }}">Slet!</button>
+						{{else}}
+							<input name="checkbox" class="checkbox" type="checkbox">
+						{{/if}}
+					</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{#each venues}}
+				<tr name="venue-content" data-id="{{id}}">
+						<td class="venue">{{name}}</td>
+						<td class="streetAndNumber">{{address.streetAndNumber}}</td>
+						<td class="zipAndCity">{{address.zipAndCity}}</td>
+						<td class="action">
+							{{#if ../inTour}}
+								<button class="sendVenueButton">Send venue til koncert</button>
+								<button class="remove">Slet!</button>
+							{{else}}
+								<input name="checkbox" class="checkbox" type="checkbox">
+							{{/if}}
+						</td>
+				</tr>
+			{{/each}}
+		</tbody>
+</table>

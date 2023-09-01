@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/tour.css" />
+<script src="/javascript/tour.js" defer></script>
+
+<div id="tourId" style="display: none">{{ tour._id }}</div>
+<div id="bandId" style="display: none">{{ tour.band._id }}</div>
+
+<div class="buttons">
+	<button id="back">Tilbage</button>
+	{{> addDatesButton}}
+	<button id="save">Gem</button>
+</div>
+
+<div>
+	<h1 id="tourName" contenteditable>{{ tour.name }}</h1>
+</div>
+
+<div>
+		<h3>Koncerter og turdage</h3>
+		{{> tourTable tour=tour }}
+</div>
+
+
+<div>
+    <h3>Bruttoliste</h3>
+		{{> venueTable tableId="bruttoTable" venues=tour.bruttoList inTour=true }}
+</div>
+
+<button id="addBrutto">Tilføj til bruttoliste</button>
+
+<div id="popup-venues" class="popup hidden">
+    <div class="popup-content">
+        <div class="close-popup" id="close-popup">+</div>
+					{{> venueTable tableId="bruttoPopupTable" venues=venues inTour=false }}
+        <button id="add-venues-bruttolist" class="button">Tilføj</button>
+    </div>
+</div>

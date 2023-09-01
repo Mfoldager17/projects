@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "39c2245f-5cb0-4d4e-b366-936127177ad2",
+		"name": "Mmmask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bands",
+			"item": [
+				{
+					"name": "getall",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/bands/",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bands",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "with empty name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"medlemmer\": \"{{person1}}, {{person2}}\",\n    \"cvrNr\": \"{{cvr}}\",\n    \"kontoNr\": \"{{kontonr}}\",\n    \"regNr\": \"{{regnr}}\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/api/bands/",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bands",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "with lorem values",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"navn\": \"{{bandname}}\",\n    \"medlemmer\": \"{{person1}}, {{person2}}\",\n    \"cvrNr\": \"{{cvr}}\",\n    \"kontoNr\": \"{{kontonr}}\",\n    \"regNr\": \"{{regnr}}\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/api/bands/",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bands",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete (manually correct ID!!!)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/bands/5fa92089dfc3512b2a425fca",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bands",
+								"5fa92089dfc3512b2a425fca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "with lorem values (manually correct ID!!!!)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"navn\": \"{{bandname}} ✨\",\n    \"medlemmer\": \"{{person1}}, {{person2}}\",\n    \"cvrNr\": \"{{cvr}}\",\n    \"kontoNr\": \"{{kontonr}}\",\n    \"regNr\": \"{{regnr}}\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/api/bands/5fa91fdc5c3c742af620abf1",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bands",
+								"5fa91fdc5c3c742af620abf1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "50e122d2-7c55-4c61-a276-a6ab94bce274",
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set(\"bandname\", pm.variables.replaceIn('{{$randomCompanyName}}'))",
+					"pm.environment.set(\"person1\", pm.variables.replaceIn('{{$randomFullName}}'))",
+					"pm.environment.set(\"person2\", pm.variables.replaceIn('{{$randomFullName}}'))",
+					"pm.environment.set(\"regnr\", pm.variables.replaceIn('{{$randomCreditCardMask}}'))",
+					"pm.environment.set(\"kontonr\", pm.variables.replaceIn('{{$randomBankAccountIban}}'))",
+					"pm.environment.set(\"cvr\", pm.variables.replaceIn('{{$randomBitcoin}}'))"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6d38f0f8-f480-461a-b8a2-a764172e2976",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "77aa1cba-0e03-4b17-99fc-66222359f777",
+			"key": "url",
+			"value": "localhost"
+		},
+		{
+			"id": "f8e2df0f-caf8-4025-aa93-e2ce1cd66ea3",
+			"key": "port",
+			"value": "8080"
+		},
+		{
+			"id": "7c1d54fb-0840-4d0f-b347-233943d616b2",
+			"key": "bandname",
+			"value": ""
+		},
+		{
+			"id": "2771b73c-1922-4c38-8f5e-f8f030f784e1",
+			"key": "person1",
+			"value": ""
+		},
+		{
+			"id": "a5ff9c93-631a-46d3-a044-60c35b71d524",
+			"key": "person2",
+			"value": ""
+		},
+		{
+			"id": "3a15067c-3b69-458c-b5ff-e597c9acf8ed",
+			"key": "regnr",
+			"value": ""
+		},
+		{
+			"id": "a3cd0633-8924-4861-9d55-f9715516dabe",
+			"key": "kontonr",
+			"value": ""
+		},
+		{
+			"id": "8f5a691a-6a21-4f02-a568-9cc81505a9e1",
+			"key": "cvr",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

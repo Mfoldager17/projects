@@ -1,0 +1,183 @@
+{{!-- <link rel="stylesheet" type="text/css" href="/css/invoice.css" /> --}}
+<script src="/javascript/invoice.js" defer></script>
+
+{{!-- OPRETTELSE AF FAKTURA - BYGGET OP AF STANDARD OG SOM REGEL OGSÅ CONTRACT --}}
+{{#if invoice}}
+<div id="_id" style="display: none">{{ invoice._id }}</div>
+{{/if}}
+
+<div class="invoice">
+    <div class="content-frame">
+        <input type="text" id="invoiceTitle" placeholder="Firma navn"
+            value="{{standard.invoiceTitle}}{{invoice.invoiceTitle}}">
+        <img src="/images/acbTriangle.png" alt="ACB Music">
+        {{!-- KUNDENS INFORMATIONER I EN DIV U. LABELS --}}
+        <div class="customer-information">
+            <input type="text" id="customer-name" placeholder="Kunde navn"
+                value="{{contract.concert.promoter.name}}{{invoice.customerInfo.name}}">
+            <div class="customer-address-information">
+                <input type="text" id="customer-streetAndNumber" placeholder="Vej og vejnr"
+                    value="{{contract.concert.promoter.address.streetAndNumber}}{{invoice.customerInfo.address.streetAndNumber}}">
+                <input type="text" id="customer-zipAndCity" placeholder="Zip og by"
+                    value="{{contract.concert.promoter.address.zipCodeAndCity}}{{invoice.customerInfo.address.zipAndCity}}">
+            </div>
+            <input type="text" id="customer-attendant" placeholder="Kustode"
+                value="{{contract.concert.promoter.contactPerson.name}}{{invoice.customerInfo.attendant}}">
+        </div>
+        {{!-- BRUGES TIL BESKRIVELSE AF EKSTRA OMKOSTNINGER ||| EKSEMPEL: FLYTNING AF KONCERT PGA. HØJ EFTERSPØRGSEL; GAV EKSTRA REVENUE TIL PROMOTER, SOM DELES MED AGENTUR/BAND --}}
+        <div class="extra-description">
+            <textarea id="extra-description" cols="30" rows="3"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{invoice.extraDescription}}</textarea>
+        </div>
+        <div class="invoice-details">
+            {{#if standard}}
+            <label for="">Fakturanr:</label>
+            <input type="text" id="invoice-number" placeholder="Udfyldes automatisk" readonly="readonly">
+            <label for="">Fakturadato:</label>
+            <input type="text" id="invoice-date" placeholder="Udfyldes automatisk" readonly="readonly">
+            {{!-- BRUGES TIL REFERENCER, SÅFREMT KUNDEN KRÆVER DETTE: EKSEMPELVIS ORDRENR. SPECIFICERET SÅ FAKTURAEN ER KOMPATIBELT MED KUNDENS REGNSSKABSPROGRAM --}}
+            <label for="">Ref:</label>
+            <input type="text" id="other-ref" placeholder="ref:">
+            {{/if}}
+            {{#if invoice}}
+            <label for="">Fakturanr:</label>
+            <input type="text" id="invoice-number" value="{{invoice.invoiceNumber}}" readonly="readonly">
+            <label for="">Fakturadato:</label>
+            <input type="text" id="invoice-date" value="{{invoice.invoiceDetails.invoiceDate}}" readonly="readonly">
+            <label for="">Ref:</label>
+            <input type="text" id="other-ref" value="{{invoice.invoiceDetails.ref}}" readonly="readonly">
+            {{/if}}
+        </div>
+        <div>
+            <table id="productTable">
+                <tr>
+                    <th>Produkt specifikation</th>
+                    <th>Antal</th>
+                    <th>Pris</th>
+                    <th>Totalpris inkl. moms</th>
+                </tr>
+                {{#if contract}}
+                <tr class="productInvoice" id="1">
+                    <td class="product" id="product-specification" contenteditable onblur="updateEconomyInput()">
+                        Provision til Agentur</td>
+                    <td class="quantity" id="quantity" contenteditable onblur="updateEconomyInput()">1</td>
+                    <td class="price" id="price" contenteditable onblur="updateEconomyInput()">
+                        {{contract.invoice.settlementAgency.commision}}</td>
+                    <td class="total-with-tax" id="total-with-tax" contenteditable onblur="updateEconomyInput()">
+                        {{contract.invoice.settlementAgency.totalSettlement}}</td>
+                    <td><button class="remove">Slet</button></td>
+                </tr>
+                {{/if}}
+                {{#each invoice.productList}}
+                <tr class="productInvoice" id="id-{{productId}}">
+                    <td class="product" id="product-specification">{{productSpec}}</td>
+                    <td class="quantity" id="quantity">{{quantity}}</td>
+                    <td class="price" id="price">{{price}}</td>
+                    <td class="total-with-tax" id="total-with-tax">
+                        {{priceWithTax}}</td>
+                </tr>
+                {{/each}}
+            </table>
+            {{#if standard}}
+            <button id="addProduct">Tilføj produkt</button>
+            {{/if}}
+        </div>
+        <div class="tax-and-total">
+            {{!-- SKAL OPDATERES NÅR DER TILFØJES ET PRODUKT --}}
+            <div class="tax-information">
+                <label for="">Momsfrit beløb:</label>
+                <input type="text" id="tax-free-amount" placeholder="Udfyldes automatisk"
+                    value="{{invoice.taxInfo.taxFreeAmount}}" readonly="readonly">
+                <label for="">Momspligtigt beløb:</label>
+                <input type="text" id="taxed-amount" placeholder="Udfyldes automatisk"
+                    value="{{invoice.taxInfo.taxAmount}}" readonly="readonly">
+            </div>
+            {{!-- SKAL OPDATERES NÅR DER TILFØJES ET PRODUKT --}}
+            <div class="total-price-with-tax">
+                <label for="">Subtotal beløb:</label>
+                <input type="text" id="subtotal" placeholder="Udfyldes automatisk"
+                    value="{{invoice.totalPriceWithTax.subtotal}}" readonly="readonly">
+                <label for="">25% moms:</label>
+                <input type="text" id="total-tax" placeholder="Udfyldes automatisk"
+                    value="{{invoice.totalPriceWithTax.tax}}" readonly="readonly">
+                <label for="">Total DKK:</label>
+                <input type="text" id="total-price" placeholder="Udfyldes automatisk"
+                    value="{{invoice.totalPriceWithTax.totalPrice}}" readonly="readonly">
+            </div>
+        </div>
+        <div class="payment-details">
+            <div class="payment-conditions">
+                <label for="">Betalingsbetingelser: Netto</label>
+                <input type="number" id="nettoDays"
+                    value="{{standard.paymentDetails.daysToPay}}{{invoice.paymentDetails.conditions.daysToPay}}">
+                <label for="">dage - Forfaldsdato:</label>
+                <input type="text" id="due-date" placeholder="Udfyldes automatisk"
+                    value="{{invoice.paymentDetails.conditions.inDueDate}}" readonly="readonly">
+            </div>
+            <div class="bank-details">
+                {{!-- TEKSTUEL BESKRIVELSE AF HVORDAN AFREGNING FOREGÅR --}}
+                <input type="text" id="payment-description" placeholder="Beskrivelse"
+                    value="{{standard.paymentDetails.bankDetails.description}}{{invoice.paymentDetails.bankDetails.description}}">
+                <input type="text" id="payment-regNo" placeholder="Registeringsnummer"
+                    value="{{standard.paymentDetails.bankDetails.regNo}}{{invoice.paymentDetails.bankDetails.regNo}}">
+                {{!-- BINDELEDET MELLEM REGNR OG KONTONR --}}
+                <label for="">-</label>
+                <input type="text" id="payment-accountNo" placeholder="Kontonummer"
+                    value="{{standard.paymentDetails.bankDetails.accountNo}}{{invoice.paymentDetails.bankDetails.accountNo}}">
+            </div>
+            <div class="payment-requirements">
+                {{!-- TEKSTUEL BESKRIVELSE AF KRAV --}}
+                <input type="text" id="requirement-description" placeholder="Beskrivelse"
+                    value="{{standard.paymentDetails.paymentRequirement.description}}{{invoice.paymentDetails.paymentRequirement.description}}">
+            </div>
+        </div>
+        <div class="agent-information">
+            {{!-- EN LINJE MED BINDELED IMELLEM HVERT ELEMENT --}}
+            <div class="company-details">
+                <input type="text" id="agent-name" placeholder="Navn"
+                    value="{{standard.agentInformation.companyDetails.name}}{{invoice.agentInformation.companyDetails.name}}">
+                <label for="">-</label>
+                <input type="text" id="agent-streetAndNumber" placeholder="Vej og vejnr"
+                    value="{{standard.agentInformation.companyDetails.address.streetAndNumber}}{{invoice.agentInformation.companyDetails.address.streetAndNumber}}">
+                <label for="">-</label>
+                <input type="text" id="agent-zipAndCity" placeholder="Zip og by"
+                    value="{{standard.agentInformation.companyDetails.address.zipAndCity}}{{invoice.agentInformation.companyDetails.address.zipAndCity}}">
+                <label for="">-</label>
+                <input type="text" id="agent-country" placeholder="Danmark"
+                    value="{{standard.agentInformation.companyDetails.address.country}}{{invoice.agentInformation.companyDetails.address.country}}">
+                <label for=""> - CVR</label>
+                <input type="text" id="agent-cvr-number" placeholder="CVR Nummer"
+                    value="{{standard.agentInformation.companyDetails.CVR}}{{invoice.agentInformation.companyDetails.CVR}}">
+            </div>
+            {{!-- EN LINJE MED BINDELED IMELLEM HVERT ELEMENT --}}
+            <div class="contact-information">
+                <input type="text" id="telephone" placeholder="Telefon nummer"
+                    value="{{standard.agentInformation.contactInformation.telephone}}{{invoice.agentInformation.contactInformation.telephone}}">
+                <label for="">-</label>
+                <input type="text" id="email" placeholder="Email adresse"
+                    value="{{standard.agentInformation.contactInformation.email}}{{invoice.agentInformation.contactInformation.email}}">
+                <label for="">-</label>
+                <input type="text" id="webpage" placeholder="Hjemmeside"
+                    value="{{standard.agentInformation.contactInformation.web}}{{invoice.agentInformation.contactInformation.web}}">
+            </div>
+            {{!-- EN LINJE MED BINDELED IMELLEM HVERT ELEMENT --}}
+            <div class="bank-details">
+                <input type="text" id="agent-bank" placeholder="Bank"
+                    value="{{standard.agentInformation.bankInformation.bank}}{{invoice.agentInformation.bankInformation.bank}}">
+                <label for="">-</label>
+                <input type="text" id="agent-regNo" placeholder="Registeringsnummer"
+                    value="{{standard.agentInformation.bankInformation.accountDetails.regNo}}{{invoice.agentInformation.bankInformation.accountDetails.regNo}}">
+                <label for="">-</label>
+                <input type="text" id="agent-accountNo" placeholder="Kontonummer"
+                    value="{{standard.agentInformation.bankInformation.accountDetails.accountNo}}{{invoice.agentInformation.bankInformation.accountDetails.accountNo}}">
+            </div>
+        </div>
+    </div>
+</div>
+<button id="back">Tilbage</button>
+{{#if standard}}
+<button id="create">Opret</button>
+{{/if}}
+{{#if invoice}}
+<button id="print">Print</button>
+{{/if}}

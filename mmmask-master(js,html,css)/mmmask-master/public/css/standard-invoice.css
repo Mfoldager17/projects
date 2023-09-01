@@ -1,0 +1,22 @@
+.dual-form {
+    padding: 2px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.dual-form * {
+    margin: 3px;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+textarea {
+    resize: none;
+}
+
+.content-frame {
+    margin: 20px;
+}

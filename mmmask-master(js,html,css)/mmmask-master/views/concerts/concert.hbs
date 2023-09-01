@@ -1,0 +1,76 @@
+<script src="/javascript/concert.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/css/concerts.css" />
+<h1>Koncert</h1>
+
+
+<div class="concertForm">
+    <label for="bands">Band:</label>
+    <select name="bands" id="bands" {{#if concert}} disabled {{/if}}>
+        {{#if concert}}
+        <option value="{{concert.band.name}}" id="{{concert.band._id}}">{{concert.band.name}}</option>
+				{{else if band}}
+				{{band}}
+        <option value="{{band.name}}" id="{{band._id}}">{{band.name}}</option>
+        {{else}}
+        {{#each bands}}
+        <option value="{{name}}" id="{{_id}}">{{name}}</option>
+        {{/each}}
+        {{/if}}
+    </select>
+
+    <label for="promoters">Arrangør:</label>
+    <select name="promoters" id="promoters" {{#if concert}} disabled {{/if}}>
+        {{#if concert}}
+        <option value="{{concert.promoter.name}}">{{concert.promoter.name}}</option>
+        {{else}}
+        {{#each promoters}}
+        <option value="{{name}}" id="{{_id}}">{{name}}</option>
+        {{/each}}
+        {{/if}}
+    </select>
+
+    <label for="venue">Spillested:</label>
+    <select name="venue" id="venue" {{#if concert}} disabled {{/if}}>
+        {{#if concert}}
+        <option value="{{concert.venue.name}}">{{concert.venue.name}}</option>
+        {{else}}
+        {{#each venues}}
+        <option value="{{name}}" id="{{_id}}">{{name}}</option>
+        {{/each}}
+        {{/if}}
+    </select>
+
+
+    <label for="address">Adresse:</label>
+    <input type="text" id="address"
+        value="{{ifelse concert.venue.address.streetAndNumber venue.address.streetAndNumber }}">
+    {{! TODO: Agree on zip and code as one or two fields }}
+    <label for="zipCity">Postnummer & By</label>
+    <input type="text" id="zipCity"
+        value="{{ifelse concert.venue.address.zipCodeAndCity venue.address.zipCodeAndCity }}">
+    <label for="date">Dato:</label>
+    <input type="date" id="date" {{#if concert}} value="{{concert.time.date}}" {{/if}}>
+    <label for="time">Tidspunkt:</label>
+    <input type="time" id="time" {{#if concert}} value="{{concert.time.start}}" {{/if}}>
+    <label for="duration">Koncert længde:</label>
+    <input type="text" id="duration" {{#if concert}} value="{{concert.time.duration}}" {{/if}}>
+
+    <label for="capacity">Kapacitet</label>
+    <input type="text" id="capacity" {{#if concert}} value="{{concert.capacity}}" {{/if}}>
+    <label for="memo">Memo:</label>
+    <textarea id="memo" rows="4" cols="20">{{#if concert}}{{concert.memo}}{{/if}}</textarea>
+
+    <label for="state">Status</label>
+    <select id="state" {{#if concert}} value="{{concert.state}}" {{/if}}>
+        <option value="blyant" id="blyant">Blyant</option>
+        <option value="confirmed" id="confirmed">Bekræftet</option>
+    </select>
+
+</div>
+<div>
+    <button id="backButton">Tilbage</button>
+    <button id="createButton" {{#if concert}} style="display: none;" {{/if}}>Opret</button>
+    <button id="saveButton" {{#if bands}} style="display: none;" {{/if}}>Gem</button>
+    <button id="deleteButton" {{#if bands}} style="display: none;" {{/if}}>Slet</button>
+    {{> shareurl }}
+</div>

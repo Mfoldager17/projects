@@ -1,0 +1,24 @@
+{{!-- <link rel="stylesheet" type="text/css" href="/css/invoices.css" /> --}}
+<script src="/javascript/invoices.js" defer></script>
+
+<h3>Faktura oversigt</h3>
+
+<div id="invoices">
+    <table id="invoice-list">
+        <tr>
+            <th>Fakturanr</th>
+            <th>Kunde</th>
+            <th>Kustode</th>
+        </tr>
+        {{#each invoices}}
+        <tr id="{{ _id }}" class="invoice">
+            <td class="invoice-number">{{ invoiceNumber }}</td>
+            <td class="customer">{{ customerInfo.name }}</td>
+            <td class="attendant">{{ customerInfo.attendant }}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+
+<button id="create">Opret Faktura</button>
+<button id="edit-standard">Rediger faktureringsstandard</button>

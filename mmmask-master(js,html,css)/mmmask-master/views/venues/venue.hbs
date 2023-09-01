@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="/css/venues.css" />
+<script src="/javascript/venue.js" defer></script>
+<h3>Spillested</h3>
+<div class="venueForm">
+
+    <label for="name">Navn</label>
+    <input type="text" id="name" {{#if venue}} value="{{venue.name}}" {{/if}}><br>
+
+    <label for="street">Adresse</label>
+    <input type="text" id="street" {{#if venue}} value="{{venue.address.streetAndNumber}}" {{/if}}><br>
+
+    <label for="zipAndCity">Postnummer & By</label>
+    <input type="text" id="zipAndCity" {{#if venue}} value="{{venue.address.zipAndCity}}" {{/if}}><br>
+
+    <button id="back">Tilbage</button>
+    <button id="create" {{#if venue}} style="display: none;" {{/if}}>Opret</button>
+    <button id="save" {{#unless venue}} style="display: none;" {{/unless}}>Gem</button>
+    <button id="delete" {{#unless venue}} style="display: none;" {{/unless}}>Slet</button>
+
+</div>

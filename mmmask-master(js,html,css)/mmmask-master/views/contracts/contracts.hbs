@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/contracts.css" />
+        <script src="/javascript/contracts.js" defer></script>
+        <title>Contracts</title>
+    </head>
+
+    <body>
+        <div id="contracts">
+            <table id="contracts-list">
+                <tr>
+                    <th>Kontraktnummer</th>
+                    <th>Dato</th>
+                    <th>Arrangør</th>
+                    <th>Artist</th>
+                    <th>Sted</th>
+                    <th>Slet</th>
+                </tr>
+                {{#each contracts}}
+                <tr id="{{ _id }}" class="contract">
+                    <td class="contractNumber">{{ contractNumber }}</td>
+                    <td class="contractDate">{{ contractDate }}</td>
+                    <td class="promoter">{{ concert.promoter.name }}</td>
+                    <td class="band">{{ concert.band.name }}</td>
+                    <td class="concert">{{ concert.venue.name }}</td>
+                    <td class="remove">Slet</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <button id="create">Opret kontrakt</button>
+    </body>
+</html>

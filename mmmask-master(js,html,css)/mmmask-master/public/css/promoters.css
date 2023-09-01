@@ -1,0 +1,110 @@
+.promoters {
+    width: 400px;
+    display: grid;
+}
+
+.promoters button {
+    height: 5vh;
+}
+
+.promoter {
+    margin-top: -1px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid;
+    cursor: pointer;
+    position: relative;
+    border: solid 1px var(--bg-border-color);
+}
+
+.promoter:hover {
+    background-color: var(--bg-blue-hover-color);
+}
+
+.promoter .img-expand-collapse {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.promoter .expanded-content {
+    display: none;
+}
+
+.promoter.expanded .expanded-content {
+    display: initial;
+    display: grid;
+    row-gap: 20px;
+}
+
+#errors {
+    grid-column: 1 / 3;
+}
+
+.promoter.expanded {
+    background-color: white;
+}
+
+.promoter .expanded-content {
+    margin-top: 10px;
+}
+
+.promoter input:disabled {
+    background: none;
+    outline: none;
+    border: 0px;
+    color: black;
+}
+
+.promoter input:disabled::placeholder {
+    color: transparent;
+}
+
+.promoter input.error {
+    background-color: pink;
+}
+
+.error-message {
+    color: red;
+}
+.error-message.hidden {
+    display: none;
+}
+
+.expanded-buttons {
+    /* margin-top: 20px; */
+    display: flex;
+    justify-content: space-between;
+    grid-column: 1/3;
+}
+
+input {
+    margin: 3px;
+}
+
+/* .expanded-buttons button {
+    height: 5vh;
+} */
+
+#id-create-promoter {
+    display: none;
+}
+
+#id-create-promoter.expanded {
+    display: initial;
+}
+
+#create {
+    margin: 20px;
+}
+
+input#name {
+    width: 100%;
+    font-size: 1em;
+}
+
+label {
+    font-weight: bold;
+}

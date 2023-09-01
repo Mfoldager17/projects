@@ -1,0 +1,50 @@
+.content {
+    display: grid;
+    /* grid-template-columns: 150px 150px 150px; */
+    /* grid-template-rows: 30px 30px 30px; */
+    /* grid-auto-flow: row; */
+}
+.form-group {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+}
+
+#name {
+    margin: 3px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-items: stretch;
+}
+#password {
+    margin: 3px;
+    grid-column: 3;
+    grid-row: 1;
+    justify-items: stretch;
+}
+#login {
+    margin: 3px;
+    grid-column: 4;
+    grid-row: 1;
+    justify-items: left;
+}
+#noName {
+    margin: 3px;
+    grid-column: 2;
+    grid-row: 2;
+    justify-items: left;
+}
+#noPassword {
+    margin: 3px;
+    grid-column: 3;
+    grid-row: 2;
+    justify-items: left;
+}
+.hidden {
+    display: none;
+}
+.authMissing {
+    margin: 3px;
+    grid-column: 2;
+    grid-row: 3;
+    justify-items: center;
+}

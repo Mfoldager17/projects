@@ -1,0 +1,17 @@
+<nav class="stroke">
+	<ul>
+		<li><a href="/">Home</a></li>
+		{{#if authenticated}}
+		<li><a href="/tours">Turnéer</a></li>
+		<li><a href="/concerts">Koncerter</a></li>
+		<li><a href="/contracts">Kontrakter</a></li>
+		<li><a href="/promoters">Arrangører</a></li>
+		<li><a href="/venues">Spillesteder</a></li>
+		<li><a href="/bands">Bands</a></li>
+		<li><a href="/invoices">Faktura</a></li>
+		{{!-- <li class="right"><a href="/login/logout">Log af</a></li> --}}
+		{{!-- {{else}} --}}
+		{{!-- <li class="right"><a href="/login">Login</a></li> --}}
+		{{/if}}
+	</ul>
+</nav>

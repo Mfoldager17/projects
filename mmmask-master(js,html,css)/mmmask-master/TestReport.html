@@ -1,0 +1,1509 @@
+
+<html>
+    <head>
+        <title>Mocha</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+        @charset "utf-8";
+
+body {
+  margin:0;
+}
+
+#mocha {
+  font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 60px 50px;
+}
+
+#mocha ul,
+#mocha li {
+  margin: 0;
+  padding: 0;
+}
+
+#mocha ul {
+  list-style: none;
+}
+
+#mocha h1,
+#mocha h2 {
+  margin: 0;
+}
+
+#mocha h1 {
+  margin-top: 15px;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+#mocha h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mocha h1 a:hover {
+  text-decoration: underline;
+}
+
+#mocha .suite .suite h1 {
+  margin-top: 0;
+  font-size: .8em;
+}
+
+#mocha .hidden {
+  display: none;
+}
+
+#mocha h2 {
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+#mocha .suite {
+  margin-left: 15px;
+}
+
+#mocha .test {
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+#mocha .test.pending:hover h2::after {
+  content: '(pending)';
+  font-family: arial, sans-serif;
+}
+
+#mocha .test.pass.medium .duration {
+  background: #c09853;
+}
+
+#mocha .test.pass.slow .duration {
+  background: #b94a48;
+}
+
+#mocha .test.pass::before {
+  content: '✓';
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  color: #00d6b2;
+}
+
+#mocha .test.pass .duration {
+  font-size: 9px;
+  margin-left: 5px;
+  padding: 2px 5px;
+  color: #fff;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#mocha .test.pass.fast .duration {
+  display: none;
+}
+
+#mocha .test.pending {
+  color: #0b97c4;
+}
+
+#mocha .test.pending::before {
+  content: '◦';
+  color: #0b97c4;
+}
+
+#mocha .test.fail {
+  color: #c00;
+}
+
+#mocha .test.fail pre {
+  color: black;
+}
+
+#mocha .test.fail::before {
+  content: '✖';
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  color: #c00;
+}
+
+#mocha .test pre.error {
+  color: #c00;
+  max-height: 300px;
+  overflow: auto;
+}
+
+#mocha .test .html-error {
+  overflow: auto;
+  color: black;
+  display: block;
+  float: left;
+  clear: left;
+  font: 12px/1.5 monaco, monospace;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #eee;
+  max-width: 85%; /*(1)*/
+  max-width: -webkit-calc(100% - 42px);
+  max-width: -moz-calc(100% - 42px);
+  max-width: calc(100% - 42px); /*(2)*/
+  max-height: 300px;
+  word-wrap: break-word;
+  border-bottom-color: #ddd;
+  -webkit-box-shadow: 0 1px 3px #eee;
+  -moz-box-shadow: 0 1px 3px #eee;
+  box-shadow: 0 1px 3px #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#mocha .test .html-error pre.error {
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0;
+  -moz-box-shadow: 0;
+  box-shadow: 0;
+  padding: 0;
+  margin: 0;
+  margin-top: 18px;
+  max-height: none;
+}
+
+/**
+ * (1): approximate for browsers not supporting calc
+ * (2): 42 = 2*15 + 2*10 + 2*1 (padding + margin + border)
+ *      ^^ seriously
+ */
+#mocha .test pre {
+  display: block;
+  float: left;
+  clear: left;
+  font: 12px/1.5 monaco, monospace;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #eee;
+  max-width: 85%; /*(1)*/
+  max-width: -webkit-calc(100% - 42px);
+  max-width: -moz-calc(100% - 42px);
+  max-width: calc(100% - 42px); /*(2)*/
+  word-wrap: break-word;
+  border-bottom-color: #ddd;
+  -webkit-box-shadow: 0 1px 3px #eee;
+  -moz-box-shadow: 0 1px 3px #eee;
+  box-shadow: 0 1px 3px #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#mocha .test h2 {
+  position: relative;
+}
+
+#mocha .test a.replay {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  text-decoration: none;
+  vertical-align: middle;
+  display: block;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  background: #eee;
+  font-size: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-transition:opacity 200ms;
+  -moz-transition:opacity 200ms;
+  -o-transition:opacity 200ms;
+  transition: opacity 200ms;
+  opacity: 0.3;
+  color: #888;
+}
+
+#mocha .test:hover a.replay {
+  opacity: 1;
+}
+
+#mocha-report.pass .test.fail {
+  display: none;
+}
+
+#mocha-report.fail .test.pass {
+  display: none;
+}
+
+#mocha-report.pending .test.pass,
+#mocha-report.pending .test.fail {
+  display: none;
+}
+#mocha-report.pending .test.pass.pending {
+  display: block;
+}
+
+#mocha-error {
+  color: #c00;
+  font-size: 1.5em;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+#mocha-stats {
+  position: fixed;
+  top: 15px;
+  right: 10px;
+  font-size: 12px;
+  margin: 0;
+  color: #888;
+  z-index: 1;
+}
+
+#mocha-stats .progress {
+  float: right;
+  padding-top: 0;
+
+  /**
+   * Set safe initial values, so mochas .progress does not inherit these
+   * properties from Bootstrap .progress (which causes .progress height to
+   * equal line height set in Bootstrap).
+   */
+  height: auto;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: initial;
+}
+
+#mocha-stats em {
+  color: black;
+}
+
+#mocha-stats a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mocha-stats a:hover {
+  border-bottom: 1px solid #eee;
+}
+
+#mocha-stats li {
+  display: inline-block;
+  margin: 0 5px;
+  list-style: none;
+  padding-top: 11px;
+}
+
+#mocha-stats canvas {
+  width: 40px;
+  height: 40px;
+}
+
+#mocha code .comment { color: #ddd; }
+#mocha code .init { color: #2f6fad; }
+#mocha code .string { color: #5890ad; }
+#mocha code .keyword { color: #8a6343; }
+#mocha code .number { color: #2f6fad; }
+
+@media screen and (max-device-width: 480px) {
+  #mocha {
+    margin: 60px 0px;
+  }
+
+  #mocha #stats {
+    position: absolute;
+  }
+}
+#mocha .test.pass pre {
+    display: none;
+}
+
+#mocha .test.fail pre {
+    display: none;
+}
+
+#mocha .test pre.error {
+    display: block;
+}
+
+#mocha .test .html-error pre.error {
+    box-shadow: none;
+}
+
+#mocha .test:hover h2:after {
+    color: #888888;
+    content: "(view source)";
+    font-family: arial;
+    font-size: 12px;
+    position: relative;
+    right: -10px;
+    top: 0;
+}
+
+#mocha .test.pass.pending h2 {
+    cursor: auto;
+}
+
+#mocha .mocha-header {
+    right: 30px;
+    position: fixed;
+    top: 15px;
+    font-size: 14px;
+    margin: 0;
+    color: #888;
+    z-index: 1;
+}
+
+#mocha .mocha-header em {
+    font-style: normal;
+    color: black;
+}
+
+#mocha .mocha-header ul {
+    display: inline-block;
+}
+
+#mocha .mocha-stats li {
+    display: inline-block;
+    margin: 0 5px;
+    list-style: none;
+    padding-top: 11px;
+}
+
+#mocha .mocha-menu {
+    margin-right: 10px;
+}
+
+#mocha .mocha-menu li {
+    display: inline-block;
+    margin-left: 10px;
+    list-style: none;
+}
+
+#mocha .mocha-menu li span {
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    padding: 3px 7px 2px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+    border-radius: 5px;
+    user-select: none;
+}
+
+#mocha .mocha-menu li span.checked {
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,.2);
+}
+
+#mocha .toggle-passes {
+    background: #b94a48;
+}
+
+        </style>
+    </head>
+    <body>
+        <div id="mocha">
+            <div class="mocha-header">
+                <ul class="mocha-menu">
+                    <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
+                </ul>
+                <ul class="mocha-stats">
+                    <li class="passes">passes: <em>100</em></li>
+                    <li class="pending">pending: <em>0</em></li>
+                    <li class="failures">failures: <em>0</em></li>
+                    <li class="duration">duration: <em>3.2s</em></li>
+                </ul>
+            </div>
+            <ul id="report"><li class="suite"><h1>Anniversary test</h1><ul><li class="suite"><h1>imagine having made 100 tests</h1><ul><li class="test pass fast"><h2>should be true<span class="duration">2ms</span></h2><pre><code>const testCount = 100
+testCount.should.equal(100)</code></pre></li></ul></li></ul></li><li class="suite"><h1>bands-api-test:</h1><ul><li class="suite"><h1>GET tests</h1><ul><li class="test pass medium"><h2>get(&#x27;/api/bands&#x27;)<span class="duration">39ms</span></h2><pre><code>async function () {
+            await request(app).get(&#x27;/api/bands&#x27;).expect(200).expect(&#x27;Content-Type&#x27;, /json/)
+        }</code></pre></li></ul></li><li class="suite"><h1>POST tests</h1><ul><li class="test pass fast"><h2>post(&#x27;/api/bands&#x27;)<span class="duration">33ms</span></h2><pre><code>async function () {
+            const response = await request(app)
+                .post(&#x27;/api/bands&#x27;)
+                .send({
+                    name: &#x27;PostTester&#x27;,
+                    members: &#x27;MedlemmerTest&#x27;,
+                    cvrNr: &#x27;cvrTest&#x27;,
+                    accNr: &#x27;kontoTest&#x27;,
+                    regNr: &#x27;regTest&#x27;
+                })
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(201)
+            response.body.name.should.be.equal(&#x27;PostTester&#x27;)
+            response.body.members.should.be.equal(&#x27;MedlemmerTest&#x27;)
+            response.body.cvrNr.should.be.equal(&#x27;cvrTest&#x27;)
+            response.body.accNr.should.be.equal(&#x27;kontoTest&#x27;)
+            response.body.regNr.should.be.equal(&#x27;regTest&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>post(&#x27;/api/bands&#x27;) uden name<span class="duration">10ms</span></h2><pre><code>async function () {
+            await request(app)
+                .post(&#x27;/api/bands&#x27;)
+                .send({
+                    members: &#x27;MedlemmerTest&#x27;,
+                    cvrNr: &#x27;cvrTest&#x27;,
+                    accNr: &#x27;kontoTest&#x27;,
+                    regNr: &#x27;regTest&#x27;
+                })
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(422)
+        }</code></pre></li></ul></li><li class="suite"><h1>PUT tests</h1><ul><li class="test pass fast"><h2>put(&#x27;/api/bands/:id&#x27;)<span class="duration">20ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            const response = await request(app)
+                .put(&#x27;/api/bands/&#x27; + band._id)
+                .send({
+                    name: &#x27;PostTester-updated&#x27;,
+                    members: &#x27;MedlemmerTest-updated&#x27;,
+                    cvrNr: &#x27;cvrTest-updated&#x27;,
+                    accNr: &#x27;kontoTest-updated&#x27;,
+                    regNr: &#x27;regTest-updated&#x27;
+                })
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(200)
+            response.body.name.should.be.equal(&#x27;PostTester-updated&#x27;)
+            response.body.members.should.be.equal(&#x27;MedlemmerTest-updated&#x27;)
+            response.body.cvrNr.should.be.equal(&#x27;cvrTest-updated&#x27;)
+            response.body.accNr.should.be.equal(&#x27;kontoTest-updated&#x27;)
+            response.body.regNr.should.be.equal(&#x27;regTest-updated&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>put(&#x27;/api/bands/:id&#x27;) bad id<span class="duration">7ms</span></h2><pre><code>async function () {
+            const response = await request(app)
+                .put(&#x27;/api/bands/&#x27; + &#x27;bad-id&#x27;)
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(422)
+        }</code></pre></li></ul></li><li class="suite"><h1>DELETE tests</h1><ul><li class="test pass fast"><h2>delete(&#x27;/api/bands/:id&#x27;)<span class="duration">12ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            await request(app)
+                .delete(&#x27;/api/bands/&#x27; + band._id)
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(200)
+        }</code></pre></li><li class="test pass fast"><h2>delete(&#x27;/api/bands/:id&#x27;) bad id<span class="duration">6ms</span></h2><pre><code>async function () {
+            await request(app)
+                .delete(&#x27;/api/bands/&#x27; + &#x27;bad-id&#x27;)
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(422)
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>bands-controller-test:</h1><ul><li class="suite"><h1>createBand()</h1><ul><li class="test pass fast"><h2>should return created band<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            const band = await createBand()
+            id = band._id
+            band.name.should.be.equal(&#x27;PostTester&#x27;)
+            band.members.should.be.equal(&#x27;MedlemmerTest&#x27;)
+            band.companyName.should.be.equal(&#x27;companyNameTest&#x27;)
+            band.address.streetAndNumber.should.be.equal(&#x27;streetAndNumberTest&#x27;)
+            band.address.zipCodeAndCity.should.be.equal(&#x27;zipCodeAndCityTest&#x27;)
+            band.cvrNr.should.be.equal(&#x27;cvrNrTest&#x27;)
+            band.accNr.should.be.equal(&#x27;accNrTest&#x27;)
+            band.regNr.should.be.equal(&#x27;regNrTest&#x27;)
+            band.contactPerson.name.should.be.equal(&#x27;contactPersonNameTest&#x27;)
+            band.contactPerson.phoneNr.should.be.equal(&#x27;contactPersonPhoneNrTest&#x27;)
+            band.contactPerson.mail.should.be.equal(&#x27;contactPersonMailTest&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should return error<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                await controller.create({
+                    members: &#x27;MedlemmerTest&#x27;,
+                    cvrNr: &#x27;cvrTest&#x27;,
+                    accNr: &#x27;kontoTest&#x27;,
+                    regNr: &#x27;regTest&#x27;
+                })
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;ValidationError&#x27;)
+                error.message.should.be.equal(&#x27;Band validation failed: name: Path &#x60;name&#x60; is required.&#x27;)
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>getAll()</h1><ul><li class="test pass fast"><h2>should be greater than 0<span class="duration">7ms</span></h2><pre><code>async () =&#x3E; {
+            await createBand()
+            const bands = await controller.getAll()
+            bands.length.should.be.greaterThan(0)
+        }</code></pre></li><li class="test pass fast"><h2>last band should be equal to newly created<span class="duration">11ms</span></h2><pre><code>async () =&#x3E; {
+            await createBand()
+            const bands = await controller.getAll()
+            bands.length.should.be.greaterThan(0)
+            const lastBand = bands[bands.length - 1]
+            lastBand._doc.should.containEql(bandData)
+            // lastBand.name.should.be.equal(&#x27;PostTester&#x27;)
+            // lastBand.members.should.be.equal(&#x27;MedlemmerTest&#x27;)
+            // lastBand.companyName.should.be.equal(&#x27;companyNameTest&#x27;)
+            // lastBand.address.streetAndNumber.should.be.equal(&#x27;streetAndNumberTest&#x27;)
+            // lastBand.address.zipCodeAndCity.should.be.equal(&#x27;zipCodeAndCityTest&#x27;)
+            // lastBand.cvrNr.should.be.equal(&#x27;cvrNrTest&#x27;)
+            // lastBand.accNr.should.be.equal(&#x27;accNrTest&#x27;)
+            // lastBand.regNr.should.be.equal(&#x27;regNrTest&#x27;)
+            // lastBand.contactPerson.name.should.be.equal(&#x27;contactPersonNameTest&#x27;)
+            // lastBand.contactPerson.phoneNr.should.be.equal(&#x27;contactPersonPhoneNrTest&#x27;)
+            // lastBand.contactPerson.mail.should.be.equal(&#x27;contactPersonMailTest&#x27;)
+        }</code></pre></li></ul></li><li class="suite"><h1>update()</h1><ul><li class="test pass fast"><h2>should return updated band<span class="duration">7ms</span></h2><pre><code>async () =&#x3E; {
+            const band = await createBand()
+            const bandNew = await controller.update(band._id, {
+                name: band.name + &#x27; UPDATED&#x27;,
+                members: band.members + &#x27; UPDATED&#x27;
+            })
+            bandNew.name.should.be.equal(band.name + &#x27; UPDATED&#x27;)
+            bandNew.members.should.be.equal(band.members + &#x27; UPDATED&#x27;)
+            // bandNew.companyName.should.be.equal(&#x27;companyNameTest-updated&#x27;)
+            // bandNew.address.streetAndNumber.should.be.equal(&#x27;streetAndNumberTest-updated&#x27;)
+            // bandNew.address.zipCodeAndCity.should.be.equal(&#x27;zipCodeAndCityTest-updated&#x27;)
+            // bandNew.cvrNr.should.be.equal(&#x27;cvrNrTest-updated&#x27;)
+            // bandNew.accNr.should.be.equal(&#x27;accNrTest-updated&#x27;)
+            // bandNew.regNr.should.be.equal(&#x27;regNrTest-updated&#x27;)
+            // bandNew.contactPerson.name.should.be.equal(&#x27;contactPersonNameTest-updated&#x27;)
+            // bandNew.contactPerson.phoneNr.should.be.equal(&#x27;contactPersonPhoneNrTest-updated&#x27;)
+            // bandNew.contactPerson.mail.should.be.equal(&#x27;contactPersonMailTest-updated&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should give error for bad id<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const badId = &#x27;badId&#x27;
+                await controller.update(badId, {
+                    name: &#x27;PostTester-updated&#x27;,
+                    members: &#x27;MedlemmerTest-updated&#x27;,
+                    cvrNr: &#x27;cvrTest-updated&#x27;,
+                    accNr: &#x27;kontoTest-updated&#x27;,
+                    regNr: &#x27;regTest-updated&#x27;
+                })
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Band&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>delete()</h1><ul><li class="test pass fast"><h2>should return removed band<span class="duration">8ms</span></h2><pre><code>async () =&#x3E; {
+            const band = await createBand()
+            const bandDeleted = await controller.delete(band._id)
+            bandDeleted._doc.should.containEql(bandData)
+            // bandDeleted.name.should.be.equal(&#x27;PostTester-updated&#x27;)
+            // bandDeleted.members.should.be.equal(&#x27;MedlemmerTest-updated&#x27;)
+            // bandDeleted.companyName.should.be.equal(&#x27;companyNameTest-updated&#x27;)
+            // bandDeleted.address.streetAndNumber.should.be.equal(&#x27;streetAndNumberTest-updated&#x27;)
+            // bandDeleted.address.zipCodeAndCity.should.be.equal(&#x27;zipCodeAndCityTest-updated&#x27;)
+            // bandDeleted.cvrNr.should.be.equal(&#x27;cvrNrTest-updated&#x27;)
+            // bandDeleted.accNr.should.be.equal(&#x27;accNrTest-updated&#x27;)
+            // bandDeleted.regNr.should.be.equal(&#x27;regNrTest-updated&#x27;)
+            // bandDeleted.contactPerson.name.should.be.equal(&#x27;contactPersonNameTest-updated&#x27;)
+            // bandDeleted.contactPerson.phoneNr.should.be.equal(&#x27;contactPersonPhoneNrTest-updated&#x27;)
+            // bandDeleted.contactPerson.mail.should.be.equal(&#x27;contactPersonMailTest-updated&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should give error for bad id<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const badId = &#x27;badId&#x27;
+                await controller.delete(badId)
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Band&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>concert-controller-test</h1><ul><li class="suite"><h1>createConcert()</h1><ul><li class="test pass fast"><h2>should return created concert<span class="duration">13ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            const promoter = await createPromoter()
+            const concert = await concertController.create({
+                promoter: promoter._id,
+                band: band._id,
+                venue: {
+                    name: &#x27;venueNavn&#x27;,
+                    address: {
+                        streetAndNumber: &#x27;Vej 1&#x27;,
+                        zipCodeAndCity: &#x27;8000 Aarhus&#x27;
+                    }
+                },
+                time: {
+                    date: &#x27;2021-01-01&#x27;,
+                    start: &#x27;20:00&#x27;,
+                    duration: &#x27;60 min.&#x27;
+                },
+                capacity: &#x27;500&#x27;,
+                memo: &#x27;7 tariffer + provision&#x27;,
+                state: &#x27;TODO&#x27;
+            })
+            concert.promoter._id.should.be.equal(promoter._id)
+            concert.band._id.should.be.equal(band._id)
+            concert.venue.name.should.be.equal(&#x27;venueNavn&#x27;)
+            concert.venue.address.streetAndNumber.should.be.equal(&#x27;Vej 1&#x27;)
+            concert.venue.address.zipCodeAndCity.should.be.equal(&#x27;8000 Aarhus&#x27;)
+            concert.time.date.should.be.equal(&#x27;2021-01-01&#x27;)
+            concert.time.start.should.be.equal(&#x27;20:00&#x27;)
+            concert.time.duration.should.be.equal(&#x27;60 min.&#x27;)
+            concert.capacity.should.be.equal(&#x27;500&#x27;)
+            concert.memo.should.be.equal(&#x27;7 tariffer + provision&#x27;)
+            concert.state.should.be.equal(&#x27;TODO&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should return error because band is missing<span class="duration">8ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            const promoter = await createPromoter()
+            try {
+                await concertController.create({
+                    promoter: promoter._id,
+                    band: band._id,
+                    date: &#x27;2021-01-01&#x27;,
+                    time: &#x27;20:00&#x27;,
+                    memo: &#x27;7 tariffer + provision&#x27;,
+                    price: &#x27;&#x27;,
+                    concertLength: &#x27;60 min.&#x27;
+                })
+                throws(&#x27;Test error, expecting validation error, NOT this&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;ValidationError&#x27;)
+                error.message.should.be.equal(&#x27;Concert validation failed: band: Path &#x60;band&#x60; is required.&#x27;)
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>getAll()</h1><ul><li class="test pass fast"><h2>1 or more concerts already exist<span class="duration">23ms</span></h2><pre><code>async function () {
+            await createConcert()
+            const concerts = await concertController.getAll()
+            concerts.length.should.be.greaterThan(0)
+        }</code></pre></li><li class="test pass fast"><h2>getById equal to newly created<span class="duration">11ms</span></h2><pre><code>async function () {
+            const concert = await createConcert()
+            concert.venue.name.should.be.equal(&#x27;venueNavn&#x27;)
+            concert.venue.address.streetAndNumber.should.be.equal(&#x27;Vej 1&#x27;)
+            concert.venue.address.zipCodeAndCity.should.be.equal(&#x27;8000 Aarhus&#x27;)
+            concert.time.date.should.be.equal(&#x27;2021-01-01&#x27;)
+            concert.time.start.should.be.equal(&#x27;20:00&#x27;)
+            concert.time.duration.should.be.equal(&#x27;60 min.&#x27;)
+            concert.capacity.should.be.equal(&#x27;500&#x27;)
+            concert.memo.should.be.equal(&#x27;7 tariffer + provision&#x27;)
+            concert.state.should.be.equal(&#x27;TODO&#x27;)
+        }</code></pre></li></ul></li><li class="suite"><h1>getConcert()</h1><ul><li class="test pass fast"><h2>should return error - bad id<span class="duration">1ms</span></h2><pre><code>async function () {
+            try {
+                const badId = &#x27;badID&#x27;
+                await concertController.getById(badId)
+                throw new Error()
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badID&#x22; at path &#x22;_id&#x22; for model &#x22;Concert&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>update()</h1><ul><li class="test pass fast"><h2>should return updated concert<span class="duration">15ms</span></h2><pre><code>async function () {
+            const concert = await createConcert()
+            const updatedConcert = await concertController.update(concert._id, {
+                time: {
+                    date: &#x27;2021-01-02&#x27;,
+                    start: &#x27;21:00&#x27;,
+                    duration: &#x27;61 min.&#x27;
+                },
+                memo: &#x27;8 tariffer + provision&#x27;,
+                state: &#x27;TODO+1&#x27;
+            })
+            updatedConcert.time.date.should.be.equal(&#x27;2021-01-02&#x27;)
+            updatedConcert.time.start.should.be.equal(&#x27;21:00&#x27;)
+            updatedConcert.time.duration.should.be.equal(&#x27;61 min.&#x27;)
+            updatedConcert.memo.should.be.equal(&#x27;8 tariffer + provision&#x27;)
+            updatedConcert.state.should.be.equal(&#x27;TODO+1&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should return error - bad id<span class="duration">1ms</span></h2><pre><code>async function () {
+            try {
+                const badId = &#x27;badID&#x27;
+                await concertController.update(badId, {
+                    time: {
+                        date: &#x27;2021-01-02&#x27;,
+                        start: &#x27;21:00&#x27;,
+                        duration: &#x27;61 min.&#x27;
+                    },
+                    memo: &#x27;8 tariffer + provision&#x27;,
+                    state: &#x27;TODO+1&#x27;
+                })
+                throw new Error()
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badID&#x22; at path &#x22;_id&#x22; for model &#x22;Concert&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>delete()</h1><ul><li class="test pass fast"><h2>should return removed concert<span class="duration">16ms</span></h2><pre><code>async function () {
+            const concert = await createConcert()
+            const concertDeleted = await concertController.delete(concert._id)
+            concertDeleted._doc.should.containEql(concert._doc)
+        }</code></pre></li><li class="test pass fast"><h2>should give error for bad id<span class="duration">1ms</span></h2><pre><code>async function () {
+            try {
+                const badId = &#x27;badId&#x27;
+                await concertController.delete(badId)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Concert&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>concerts-frontend-test</h1><ul><li class="test pass slow"><h2>see input in creating concert page<span class="duration">94ms</span></h2><pre><code>async function () {
+        const res = await request(app)
+            .get(&#x27;/concerts/create&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;)
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/id=&#x22;bands&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;promoters&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;venue&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;date&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;time&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;duration&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;capacity&#x22;/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass medium"><h2>see values when updating concert<span class="duration">52ms</span></h2><pre><code>async function () {
+        const res = await request(app)
+            .get(&#x27;/concerts/&#x27; + concert._id)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;)
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/Spillested/).should.be.greaterThan(0)
+        res.text.search(/Spillestedets gade/).should.be.greaterThan(0)
+        res.text.search(/4545 Horsens/).should.be.greaterThan(0)
+        res.text.search(/24.12.2020/).should.be.greaterThan(0)
+        res.text.search(/kl.20:00/).should.be.greaterThan(0)
+        res.text.search(/2 timer/).should.be.greaterThan(0)
+        res.text.search(/Kommentar/).should.be.greaterThan(0)
+        res.text.search(/500/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see more than one concert<span class="duration">30ms</span></h2><pre><code>async function () {
+        newConcert = await concertController.create({
+            promoter: promoter,
+            band: band,
+            venue: {
+                name: &#x27;nytSpillested&#x27;,
+                address: {
+                    streetAndNumber: &#x27;Nyt spillesteds gade&#x27;,
+                    zipCodeAndCity: &#x27;4545 Aalborg&#x27;
+                }
+            },
+            time: {
+                date: &#x27;02.12.2020&#x27;,
+                start: &#x27;kl.18:00&#x27;,
+                duration: &#x27;1 time&#x27;
+            },
+            capacity: &#x27;100&#x27;,
+            memo: &#x27;En lang kommentar&#x27;,
+            state: &#x27;Blyant&#x27;
+        })
+        const res = await request(app)
+            .get(&#x27;/concerts&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/24.12.2020/).should.be.greaterThan(0)
+        res.text.search(/02.12.2020/).should.be.greaterThan(0)
+        res.text.search(/Spillested/).should.be.greaterThan(0)
+        res.text.search(/nytSpillested/).should.be.greaterThan(0)
+        res.text.search(/Blyant/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>check selections<span class="duration">20ms</span></h2><pre><code>async function () {
+        const res = await request(app)
+            .get(&#x27;/concerts&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/V&#xE6;lg band:/).should.be.greaterThan(0)
+        res.text.search(/V&#xE6;lg status:/).should.be.greaterThan(0)
+        res.text.search(/select/).should.be.greaterThan(3)
+        res.text.search(/blyant/).should.be.greaterThan(0)
+        res.text.search(/confirmed/).should.be.greaterThan(0)
+    }</code></pre></li></ul></li><li class="suite"><h1>contract-controller-test:</h1><ul><li class="suite"><h1>create()</h1><ul><li class="test pass fast"><h2>should return created contract<span class="duration">27ms</span></h2><pre><code>async () =&#x3E; {
+            const concert = await createConcert(promoterData, bandData, concertData)
+            const contract = await contractController.create({
+                contractNumber,
+                contractDate,
+                concert,
+                ticketPrice,
+                paymentDetails,
+                invoice,
+                totalSettlement,
+                other
+            })
+            contract._doc.contractNumber.should.equal(contractNumber)
+            contract._doc.contractDate.should.equal(contractDate)
+            contract._doc.concert._doc.should.containEql(concertData)
+            contract._doc.concert._doc.promoter._doc.should.containEql(promoterData)
+            contract._doc.concert._doc.band._doc.should.containEql(bandData)
+            contract._doc.ticketPrice.should.equal(ticketPrice)
+            contract._doc.paymentDetails.should.equal(paymentDetails)
+            contract._doc.invoice.should.containEql(invoice)
+            contract._doc.totalSettlement.should.equal(totalSettlement)
+            contract._doc.other.should.equal(other)
+        }</code></pre></li><li class="test pass fast"><h2>should return error<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                await contractController.create({})
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;ValidationError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Contract validation failed: concert: Path &#x60;concert&#x60; is required., contractNumber: Path &#x60;contractNumber&#x60; is required.&#x27;
+                )
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>getAll() gives</h1><ul><li class="test pass fast"><h2>0 when no contracts in system<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+            const contracts = await contractController.getAll()
+            contracts.length.should.be.equal(0)
+        }</code></pre></li><li class="test pass fast"><h2>should have one<span class="duration">24ms</span></h2><pre><code>async () =&#x3E; {
+            const concert = await createConcert(promoterData, bandData, concertData)
+            const contract = await contractController.create({
+                contractNumber,
+                contractDate,
+                concert,
+                ticketPrice,
+                paymentDetails,
+                invoice,
+                totalSettlement,
+                other
+            })
+            const contracts = await contractController.getAll()
+            contracts.length.should.be.equal(1)
+        }</code></pre></li><li class="test pass fast"><h2>last contract should be equal to newly created<span class="duration">31ms</span></h2><pre><code>async () =&#x3E; {
+            const concert = await createConcert(promoterData, bandData, concertData)
+            const contract1 = await contractController.create({
+                contractNumber,
+                contractDate,
+                concert,
+                ticketPrice,
+                paymentDetails,
+                invoice,
+                totalSettlement,
+                other
+            })
+            const contract2 = await contractController.create({
+                contractNumber: &#x27;PNew123&#x27;,
+                contractDate,
+                concert,
+                ticketPrice,
+                paymentDetails,
+                invoice,
+                totalSettlement,
+                other
+            })
+            const contracts = await contractController.getAll()
+            contracts[0].contractNumber.should.equal(contract1.contractNumber)
+            contracts[1].contractNumber.should.equal(contract2.contractNumber)
+            contracts.length.should.be.equal(2)
+        }</code></pre></li></ul></li><li class="suite"><h1>update()</h1><ul><li class="test pass fast"><h2>should give error for bad id<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const badId = &#x27;badId&#x27;
+                await contractController.update(badId, {
+                    totalSettlement: &#x27;1.000.001,00 DKK&#x27;
+                })
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Contract&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>delete()</h1><ul><li class="test pass fast"><h2>should give error for bad id<span class="duration">0ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const badId = &#x27;badId&#x27;
+                await contractController.delete(badId)
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Contract&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>contract-frontend-test</h1><ul><li class="suite"><h1>visiting /contracts i assume</h1><ul><li class="test pass fast"><h2>to see promoters and artists of added contracts<span class="duration">37ms</span></h2><pre><code>async function () {
+            const contract = await create()
+            const response = await request(app).get(&#x27;/contracts&#x27;).expect(200).expect(&#x27;Content-Type&#x27;, /html/)
+            response.text.search(hasValue(contract.concert.promoter.name)).should.be.greaterThan(0)
+            response.text.search(hasValue(contract.concert.band.name)).should.be.greaterThan(0)
+            response.text.search(hasValue(contract.concert.venue.name)).should.be.greaterThan(0)
+        }</code></pre></li><li class="test pass medium"><h2>get(&#x27;/bands/edit?id=:id&#x27;) should contain info of added band<span class="duration">53ms</span></h2><pre><code>async () =&#x3E; {
+            const contract = await create()
+            const res = (
+                await request(app)
+                    .get(&#x27;/contracts/&#x27; + contract._id)
+                    .expect(200)
+                    .expect(&#x27;Content-Type&#x27;, /html/)
+            ).text
+            res.search(hasValue(contract.contractNumber)).should.be.greaterThan(0)
+            res.search(hasValue(contract.contractDate)).should.be.greaterThan(0)
+            // res.search(hasValue(contract.concert)).should.be.greaterThan(0)
+            res.search(hasValue(contract.ticketPrice)).should.be.greaterThan(0)
+            res.search(hasValue(contract.paymentDetails)).should.be.greaterThan(0)
+            // res.search(hasValue(contract.invoice)).should.be.greaterThan(0)
+            res.search(hasValue(contract.totalSettlement)).should.be.greaterThan(0)
+            res.search(hasValue(contract.other)).should.be.greaterThan(0)
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>with promoter api i can:</h1><ul><li class="suite"><h1>try to POST promoters</h1><ul><li class="test pass fast"><h2>and post correct should work<span class="duration">9ms</span></h2><pre><code>async () =&#x3E; {
+            const response = await request(app)
+                .post(&#x27;/api/promoters&#x27;)
+                .send(JSON.stringify(basePromoter))
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(201)
+            response.body.name.should.equal(basePromoter.name)
+            response.body.address.should.containEql(basePromoter.address)
+            response.body.contactPerson.should.containEql(basePromoter.contactPerson)
+            // response.body.postalcode.should.be.equal(basePromoter.postalcode)
+            // response.body.city.should.be.equal(basePromoter.city)
+            // response.body.attendant.should.be.equal(basePromoter.attendant)
+            // response.body.telephone.should.be.equal(basePromoter.telephone)
+            // response.body.mail.should.be.equal(basePromoter.mail)
+        }</code></pre></li><li class="test pass fast"><h2>and post incorrect (without name) should fail<span class="duration">6ms</span></h2><pre><code>async () =&#x3E; {
+            let promoterNameless = Object.assign({}, basePromoter)
+            promoterNameless.name = &#x27;&#x27;
+            await request(app)
+                .post(&#x27;/api/promoters&#x27;)
+                .send({ promoterNameless })
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(422)
+        }</code></pre></li><li class="test pass fast"><h2>and posting identical names should give error<span class="duration">11ms</span></h2><pre><code>async () =&#x3E; {
+            controller.create(basePromoter)
+            await request(app)
+                .post(&#x27;/api/promoters&#x27;)
+                .send(JSON.stringify(basePromoter))
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(409)
+        }</code></pre></li></ul></li><li class="suite"><h1>try to update (PUT) new values</h1><ul><li class="test pass fast"><h2>and be able to update name<span class="duration">12ms</span></h2><pre><code>async () =&#x3E; {
+            const promoter = await controller.create(basePromoter)
+            const promoterNew = basePromoter
+            promoterNew.name = promoterNew.name + &#x27; TEST&#x27;
+            const response = await request(app)
+                .put(&#x27;/api/promoters/&#x27; + promoter._id)
+                .send(JSON.stringify(promoterNew))
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(200)
+            response.body.should.containEql(promoterNew)
+            // response.body.name.should.be.equal(promoterNewName._doc.name)
+            // response.body.address.should.be.equal(promoterNewName._doc.address)
+            // response.body.postalcode.should.be.equal(promoterNewName._doc.postalcode)
+            // response.body.city.should.be.equal(promoterNewName._doc.city)
+            // response.body.attendant.should.be.equal(promoterNewName._doc.attendant)
+            // response.body.telephone.should.be.equal(promoterNewName._doc.telephone)
+            // response.body.mail.should.be.equal(promoterNewName._doc.mail)
+            // response.body._id.should.be.equal(&#x27;&#x27; + basePromoterInDb._id) // ID should be same as original
+        }</code></pre></li><li class="test pass fast"><h2>and give error with illegal id<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            await request(app)
+                .put(&#x27;/api/promoters/&#x27; + &#x27;bad-id&#x27;)
+                .send(
+                    JSON.stringify({
+                        _id: &#x27;bad-id&#x27;,
+                        name: &#x27;Poptester City Downtown Lolol&#x27;,
+                        address: &#x27;Haramsensvej 28&#x27;,
+                        postalcode: 8030,
+                        city: &#x27;Baggish&#x27;,
+                        attendant: &#x27;Lemming Drag&#xF8;gersen&#x27;,
+                        telephone: &#x27;+45 70 70 70 70&#x27;,
+                        mail: &#x27;ld_7070@Poptester.com&#x27;
+                    })
+                )
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(422)
+        }</code></pre></li></ul></li><li class="suite"><h1>DELETE tests</h1><ul><li class="test pass fast"><h2>delete(&#x27;/api/promoters/:id&#x27;)<span class="duration">7ms</span></h2><pre><code>async () =&#x3E; {
+            const response = await request(app)
+                .delete(&#x27;/api/promoters/&#x27; + basePromoterInDb._id)
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(200)
+        }</code></pre></li><li class="test pass fast"><h2>delete(&#x27;/api/promoters/:id&#x27;) bad id<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            const response = await request(app)
+                .delete(&#x27;/api/promoters/&#x27; + &#x27;bad-id&#x27;)
+                .set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+                .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+                .expect(422)
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>promoter-controller-test:</h1><ul><li class="suite"><h1>create()</h1><ul><li class="test pass fast"><h2>should return created promoter<span class="duration">3ms</span></h2><pre><code>async () =&#x3E; {
+            const promoter = await controller.create(basePromoter)
+            promoter._doc.should.containEql(basePromoter)
+        }</code></pre></li><li class="suite"><h1>can provide with errors given</h1><ul><li class="test pass fast"><h2>a nameless promoter<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+                const promoterWithoutName = Object.assign({}, basePromoter)
+                delete promoterWithoutName.name
+                try {
+                    const promoter = await controller.create(promoterWithoutName)
+                    throw &#x27;Expecting NOT this error&#x27; // ensures catch is triggered
+                } catch (err) {
+                    err.name.should.be.equal(&#x27;ValidationError&#x27;) // Default error from mongo
+                    err.message.should.be.match(/Promoter validation failed: name: Path &#x60;name&#x60; is required./)
+                }
+            }</code></pre></li><li class="test pass fast"><h2>duplicate promoter names<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+                try {
+                    const promoter1 = await controller.create(basePromoter)
+                    const promoter2 = await controller.create(basePromoter)
+                    throw &#x27;Expecting NOT this error&#x27; // ensures catch is triggered
+                } catch (err) {
+                    err.name.should.be.equal(&#x27;MongoError&#x27;) // Default error from mongo
+                    err.message.should.be.match(/E11000 duplicate key error collection/)
+                }
+            }</code></pre></li></ul></li></ul></li><li class="suite"><h1>getAll() gives</h1><ul><li class="test pass fast"><h2>0 count when no entries<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+            const promoters = await controller.getAll()
+            promoters.length.should.be.equal(0)
+        }</code></pre></li><li class="test pass fast"><h2>1 count when adding 1<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            await controller.create(basePromoter)
+            const promoters = await controller.getAll()
+            promoters.length.should.be.equal(1)
+        }</code></pre></li><li class="test pass fast"><h2>2 count when adding 2, and find both in list<span class="duration">12ms</span></h2><pre><code>async () =&#x3E; {
+            // Test data
+            const basePromoter2 = Object.assign({}, basePromoter)
+            basePromoter2.name = &#x27;Base 2&#x27;
+            const promoter = await controller.create(basePromoter)
+            const promoter2 = await controller.create(basePromoter2)
+            const promoters = await controller.getAll()
+            promoters.length.should.be.equal(2)
+            promoters.should.containDeep([promoter._doc, promoter2._doc])
+        }</code></pre></li></ul></li><li class="suite"><h1>update() gives</h1><ul><li class="test pass fast"><h2>same promoter with updated values<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            const promoterOld = await controller.create(basePromoter)
+            const promoterNewName = Object.assign({}, basePromoter)
+            promoterNewName.name = promoterOld.name + &#x27; NEW&#x27;
+            const promoterUpdated = await controller.update(promoterOld._id, promoterNewName)
+            // TODO: HERE
+            // promoterUpdated.should.containEql(promoterNewName)
+            promoterUpdated._id.toString().should.equal(promoterOld._doc._id.toString())
+        }</code></pre></li><li class="test pass fast"><h2>error when parsing bad id<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const promoterUpdated = await controller.update(&#x27;badId&#x27;, basePromoter)
+                throw &#x27;Expecting NOT this error&#x27; // ensures catch is triggered
+            } catch (err) {
+                err.name.should.be.equal(&#x27;CastError&#x27;)
+                err.message.should.be.match(/Cast to ObjectId failed for value/)
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>delete() gives</h1><ul><li class="test pass fast"><h2>back the promoter on succesful delete<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            const promoterFirst = await controller.create(basePromoter)
+            const promoterDeleted = await controller.delete(promoterFirst._id)
+            promoterFirst._doc.should.containEql(promoterDeleted._doc)
+        }</code></pre></li><li class="test pass fast"><h2>error if invalid id<span class="duration">0ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const promoter = await controller.delete(&#x27;badId&#x27;, basePromoter)
+                throw &#x27;Expecting NOT this error&#x27; // ensures catch is triggered
+            } catch (err) {
+                err.name.should.be.equal(&#x27;CastError&#x27;)
+                err.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Promoter&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>working with frontend promoters i should</h1><ul><li class="test pass fast"><h2>see input in CREATING promoter page<span class="duration">21ms</span></h2><pre><code>async () =&#x3E; {
+        const res = await request(app)
+            .get(&#x27;/promoters/create&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/&#x3C;input.*?id=&#x22;name&#x22;/).should.be.greaterThan(0)
+        res.text.search(/&#x3C;input.*?id=&#x22;streetAndNumber&#x22;/).should.be.greaterThan(0)
+        res.text.search(/&#x3C;input.*?id=&#x22;zipCodeAndCity&#x22;/).should.be.greaterThan(0)
+        res.text.search(/&#x3C;input.*?id=&#x22;attendant&#x22;/).should.be.greaterThan(0)
+        res.text.search(/&#x3C;input.*?id=&#x22;phoneNr&#x22;/).should.be.greaterThan(0)
+        res.text.search(/&#x3C;input.*?id=&#x22;mail&#x22;/).should.be.greaterThan(0)
+        res.text.search(/&#x3C;button.*?id=&#x22;submit-or-edit&#x22;&#x3E;/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see input and values when UPDATING promoter<span class="duration">27ms</span></h2><pre><code>async () =&#x3E; {
+        const promoter = await controller.create(basePromoter)
+        const res = (
+            await request(app)
+                .get(&#x27;/promoters/edit?id=&#x27; + promoter._id)
+                .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+                .expect(&#x27;Content-Type&#x27;, /html/)
+                .expect(200)
+        ).text
+        // Has Input Fields
+        res.search(/input.+id=&#x22;name&#x22;/).should.be.greaterThan(0)
+        res.search(/input.+id=&#x22;streetAndNumber&#x22;/).should.be.greaterThan(0)
+        res.search(/input.+id=&#x22;zipCodeAndCity&#x22;/).should.be.greaterThan(0)
+        res.search(/input.+id=&#x22;attendant&#x22;/).should.be.greaterThan(0)
+        res.search(/input.+id=&#x22;phoneNr&#x22;/).should.be.greaterThan(0)
+        res.search(/input.+id=&#x22;mail&#x22;/).should.be.greaterThan(0)
+        res.search(/&#x3C;button id=&#x22;submit-or-edit&#x22;&#x3E;/).should.be.greaterThan(0)
+        // Has values
+        res.search(hasValue(promoter.name)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.address.streetAndNumber)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.address.zipCodeAndCity)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.contactPerson.name)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.contactPerson.phoneNr)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.contactPerson.mail)).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see values for promoter when READING<span class="duration">19ms</span></h2><pre><code>async () =&#x3E; {
+        const promoter = await controller.create(basePromoter)
+        const res = (
+            await request(app)
+                .get(&#x27;/promoters/edit?id=&#x27; + promoter._id)
+                .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+                .expect(&#x27;Content-Type&#x27;, /html/)
+                .expect(200)
+        ).text
+        // Has values
+        res.search(hasValue(promoter.name)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.address.streetAndNumber)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.address.zipCodeAndCity)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.contactPerson.name)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.contactPerson.phoneNr)).should.be.greaterThan(0)
+        res.search(hasValue(promoter.contactPerson.mail)).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see word slet when viewing (DELETE)<span class="duration">19ms</span></h2><pre><code>async () =&#x3E; {
+        const promoter = await controller.create(basePromoter)
+        const res = await request(app)
+            .get(&#x27;/promoters/edit?id=&#x27; + promoter._id)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        // Has values
+        res.text.search(/&#x3C;button.+Slet&#x3C;\/button&#x3E;/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see more than one promoter<span class="duration">22ms</span></h2><pre><code>async () =&#x3E; {
+        const promoter = await controller.create(basePromoter)
+        const promoter2Name = &#x27;Mathias Baghave&#x27;
+        await controller.create({
+            name: promoter2Name,
+            address: {
+                streetAndNumber: &#x27;Et andet sted i Aarhus&#x27;,
+                zipCodeAndCity: &#x27;8200 Et andet sted i Jylland&#x27;
+            },
+            contactPerson: {
+                name: &#x27;Mathias&#x27;,
+                phoneNr: &#x27;87654321&#x27;,
+                mail: &#x27;mathias2@zoomer.dk&#x27;
+            }
+        })
+        const res = await request(app)
+            .get(&#x27;/promoters&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;) // hmm
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        // Has values
+        res.text.search(hasValue(promoter.name)).should.be.greaterThan(0)
+        res.text.search(hasValue(promoter2Name)).should.be.greaterThan(0)
+    }</code></pre></li></ul></li><li class="suite"><h1>Filnavn her</h1><ul><li class="suite"><h1>Metode/funktion der tester</h1><ul><li class="test pass fast"><h2>Forventet resultalt<span class="duration">0ms</span></h2><pre><code></code></pre></li></ul></li></ul></li><li class="suite"><h1>template-test</h1><ul><li class="suite"><h1>config.localPort</h1><ul><li class="test pass fast"><h2>should be equal to 8080<span class="duration">0ms</span></h2><pre><code>config.localPort.should.be.equal(8080)</code></pre></li></ul></li></ul></li><li class="suite"><h1>token api test </h1><ul><li class="test pass slow"><h2>can generate token when authenticated<span class="duration">221ms</span></h2><pre><code>async function () {
+        const authSession = await createUserAndAuthenticate()
+        const response = await authSession.post(&#x27;/api/token&#x27;).send(tokenBase).expect(201)
+        const token = response.body
+        controllerToken.verifyTokenUrl(tokenBase.urlpath, token).should.be.true()
+    }</code></pre></li><li class="test pass fast"><h2>can NOT generate token when UNauthenticated<span class="duration">14ms</span></h2><pre><code>async function () {
+        const unauthSession = session(app)
+        await unauthSession.post(&#x27;/api/token&#x27;).send(tokenBase).expect(401)
+    }</code></pre></li></ul></li><li class="suite"><h1>token-controller-test</h1><ul><li class="test pass fast"><h2>should give a token given a url<span class="duration">1ms</span></h2><pre><code>const token = controller.generateToken(baseUrl, expirationInDays)
+token.should.be.a.String()
+token.length.should.be.above(50)</code></pre></li><li class="test pass fast"><h2>should give error if insufficient: missing argument<span class="duration">0ms</span></h2><pre><code>try {
+    controller.generateToken(baseUrl)
+    throw new Error(&#x27;Incorrect error, I want to reach catch&#x27;)
+} catch (err) {
+    err.message.should.equal(&#x27;Insufficient data&#x27;)
+}</code></pre></li><li class="test pass fast"><h2>should be true given same url as token<span class="duration">1ms</span></h2><pre><code>const token = controller.generateToken(baseUrl, expirationInDays)
+controller.verifyTokenUrl(baseUrl, token).should.be.true()
+const token2 = controller.generateToken(contractsUrl, expirationInDays)
+controller.verifyTokenUrl(contractsUrl, token2).should.be.true()</code></pre></li><li class="test pass fast"><h2>should be false given different url as token<span class="duration">0ms</span></h2><pre><code>const token = controller.generateToken(baseUrl, expirationInDays)
+controller.verifyTokenUrl(contractsUrl, token).should.be.false()</code></pre></li></ul></li><li class="suite"><h1>tour-controller-test</h1><ul><li class="suite"><h1>create tour test</h1><ul><li class="test pass fast"><h2>should return created test<span class="duration">21ms</span></h2><pre><code>async function () {
+            // Initializing test elements
+            const band = await createBand()
+            const bandId = band._id
+            const venue = await createVenue()
+            const venueId = venue._id
+            const tourDay1 = {
+                date: &#x27;06/11/2020&#x27;,
+                note: &#x27;Peter kan ikke k&#xF8;re bussen&#x27;
+            }
+            const tourDay2 = {
+                concert: (await createConcert(band))._id,
+                note: &#x27;n&#xE6;sten afsluttet&#x27;
+            }
+            const tour = await controllerTour.create({
+                name: &#x27;PATINA &#x2013; 2020&#x27;,
+                band: bandId,
+                tourDays: [tourDay1, tourDay2],
+                bruttoList: [venueId]
+            })
+            // Test
+            tour.name.should.be.equal(&#x27;PATINA &#x2013; 2020&#x27;)
+            tour.band.toString().should.be.equal(bandId.toString())
+            tour.tourDays[0].date.should.equal(tourDay1.date)
+            tour.tourDays[0].note.should.equal(tourDay1.note)
+            tour.tourDays[1].concert.toString().should.equal(tourDay2.concert._id.toString())
+            tour.tourDays[1].note.should.equal(tourDay2.note)
+            tour.bruttoList.length.should.be.equal(1)
+        }</code></pre></li><li class="test pass fast"><h2>should return error<span class="duration">2ms</span></h2><pre><code>async function () {
+            try {
+                await controllerTour.create({ name: &#x27;tourname&#x27; })
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;ValidationError&#x27;)
+                error.message.should.be.equal(&#x27;Tour validation failed: band: Path &#x60;band&#x60; is required.&#x27;)
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>getTours() should return tours</h1><ul><li class="test pass fast"><h2>0 when no tours in system<span class="duration">3ms</span></h2><pre><code>async function () {
+            const tours = await controllerTour.getTours()
+            tours.length.should.be.equal(0)
+        }</code></pre></li><li class="test pass fast"><h2>should have one<span class="duration">11ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            const bandId = band._id
+            const tour = await controllerTour.create({
+                name: &#x27;PATINA &#x2013; 2020&#x27;,
+                band: bandId
+            })
+            const tours = await controllerTour.getTours()
+            tours.length.should.be.equal(1)
+        }</code></pre></li></ul></li><li class="suite"><h1>update tour</h1><ul><li class="test pass fast"><h2>should return updated tour<span class="duration">16ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            const bandId = band._id
+            const venue = await createVenue()
+            const venueId = venue._id
+            const tour = await controllerTour.create({
+                name: &#x27;PATINA &#x2013; 2020&#x27;,
+                band: bandId,
+                bruttoList: [venueId]
+            })
+            const tourOYoy = await controllerTour.getById(tour._id)
+            const updatedTour = await controllerTour.update(tour._id, {
+                name: &#x27;PATINA &#x2013; 2021&#x27;
+            })
+            updatedTour.name.should.be.equal(&#x27;PATINA &#x2013; 2021&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should give error for bad id<span class="duration">1ms</span></h2><pre><code>async function () {
+            try {
+                const badId = &#x27;badId&#x27;
+                await controllerTour.update(badId, {})
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Tour&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>delete()</h1><ul><li class="test pass fast"><h2>should return deleted tour<span class="duration">7ms</span></h2><pre><code>async function () {
+            const band = await createBand()
+            const bandId = band._id
+            const tour = await controllerTour.create({
+                name: &#x27;PATINA &#x2013; 2020&#x27;,
+                band: bandId
+            })
+            const deletedTour = await controllerTour.delete(tour._id)
+            deletedTour.name.should.be.equal(&#x27;PATINA &#x2013; 2020&#x27;)
+            deletedTour.band.toString().should.be.equal(bandId.toString())
+        }</code></pre></li><li class="test pass fast"><h2>should give error for bad id<span class="duration">0ms</span></h2><pre><code>async function () {
+            try {
+                const badId = &#x27;badId&#x27;
+                await controllerTour.delete(badId)
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;CastError&#x27;)
+                error.message.should.be.equal(
+                    &#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Tour&#x22;&#x27;
+                )
+            }
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>tour-frontend-test</h1><ul><li class="suite"><h1>visiting /tours</h1><ul><li class="test pass fast"><h2>to see list of tours/tour added<span class="duration">36ms</span></h2><pre><code>async function () {
+            const tour = await create()
+            const response = await request(app).get(&#x27;/tours&#x27;).expect(200).expect(&#x27;Content-Type&#x27;, /html/)
+            response.text.search(hasValue(tour.name)).should.be.greaterThan(0)
+            response.text.search(hasValue(bandData.name)).should.be.greaterThan(0)
+        }</code></pre></li></ul></li><li class="suite"><h1>visiting /tours/:id</h1><ul><li class="test pass medium"><h2>get(&#x27;/tours/:id&#x27;) should contain info of added tour<span class="duration">58ms</span></h2><pre><code>async function () {
+            const tour = await create()
+            const response = await request(app)
+                .get(&#x27;/tours/&#x27; + tour._id)
+                .expect(200)
+                .expect(&#x27;Content-Type&#x27;, /html/)
+            response.text.search(hasValue(tour.name)).should.be.greaterThan(0)
+            response.text.search(hasValue(tour.tourDays[0].date)).should.be.greaterThan(0)
+            response.text.search(hasValue(tour.tourDays[0].note)).should.be.greaterThan(0)
+            response.text.search(hasValue(concertDate)).should.be.greaterThan(0)
+            response.text.search(hasValue(tour.tourDays[1].note)).should.be.greaterThan(0)
+            response.text.search(hasValue(venue1Data.name)).should.be.greaterThan(0)
+            response.text.search(hasValue(venue1Data.address.streetAndNumber)).should.be.greaterThan(0)
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>login-controller-test:</h1><ul><li class="suite"><h1>create()</h1><ul><li class="test pass slow"><h2>should return created user<span class="duration">123ms</span></h2><pre><code>async () =&#x3E; {
+            const user = await createUser()
+            user.name.should.be.equal(&#x27;Anders&#x27;)
+        }</code></pre></li><li class="test pass fast"><h2>should return error on name<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                await controller.create({
+                    password: &#x27;sa20SA&#x27;
+                })
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;ValidationError&#x27;)
+                error.message.should.be.equal(&#x27;User validation failed: name: Path &#x60;name&#x60; is required.&#x27;)
+            }
+        }</code></pre></li><li class="test pass fast"><h2>should return error on password<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                await controller.create({
+                    name: &#x27;Anders&#x27;
+                })
+                throw new Error(&#x27;Skulle aldrig ske&#x27;)
+            } catch (error) {
+                error.name.should.be.equal(&#x27;ValidationError&#x27;)
+                error.message.should.be.equal(&#x27;User validation failed: password: Path &#x60;password&#x60; is required.&#x27;)
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>correctLogin()</h1><ul><li class="test pass slow"><h2>should be true<span class="duration">242ms</span></h2><pre><code>async () =&#x3E; {
+            const correctUser = await createUser()
+            res = await controller.correctLogin(userData)
+            res.should.be.true()
+        }</code></pre></li><li class="test pass fast"><h2>should be false<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+            const altUser = {
+                name: &#x27;Anders&#x27;,
+                password: &#x27;20SA&#x27;
+            }
+            const res = await controller.correctLogin(altUser)
+            res.should.be.false()
+        }</code></pre></li><li class="test pass slow"><h2>should be false 2<span class="duration">201ms</span></h2><pre><code>async () =&#x3E; {
+            const correctUser = await createUser()
+            const altUser = {
+                name: correctUser.name,
+                password: &#x27;20SA&#x27;
+            }
+            const res = await controller.correctLogin(altUser)
+            res.should.be.false()
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>users-frontend-test</h1><ul><li class="suite"><h1>visiting /login</h1><ul><li class="test pass fast"><h2>to see login fields<span class="duration">13ms</span></h2><pre><code>async function () {
+            const response = (await request(app).get(&#x27;/login&#x27;).expect(200).expect(&#x27;Content-Type&#x27;, /html/u)).text
+            response.search(/&#x3C;input.*?id=&#x22;name&#x22;/u).should.be.greaterThan(0)
+            response.search(/&#x3C;input.*?id=&#x22;password&#x22;/u).should.be.greaterThan(0)
+            response.search(/&#x3C;button.*?id=&#x22;login&#x22;/u).should.be.greaterThan(0)
+        }</code></pre></li></ul></li><li class="suite"><h1>visiting /contracts</h1><ul><li class="test pass fast"><h2>when not logged in expecting to be prompted<span class="duration">10ms</span></h2><pre><code>async function () {
+            const response = (await request(app).get(&#x27;/contracts&#x27;).expect(&#x27;Content-Type&#x27;, /html/u)).text
+            response.search(/&#x3C;input.*?id=&#x22;name&#x22;/u).should.be.greaterThan(0)
+            response.search(/&#x3C;input.*?id=&#x22;password&#x22;/u).should.be.greaterThan(0)
+            response.search(/&#x3C;button.*?id=&#x22;login&#x22;/u).should.be.greaterThan(0)
+        }</code></pre></li><li class="test pass slow"><h2>after logged in expecting to not see login fields<span class="duration">235ms</span></h2><pre><code>async function () {
+            const authSession = await createUserAndAuthenticate()
+            const response = (await authSession.get(&#x27;/contracts&#x27;).expect(200).expect(&#x27;Content-Type&#x27;, /html/u)).text
+            response.search(/&#x3C;input.*?id=&#x22;name&#x22;/u).should.be.equal(-1)
+            response.search(/&#x3C;input.*?id=&#x22;password&#x22;/u).should.be.equal(-1)
+            response.search(/&#x3C;button.*?id=&#x22;login&#x22;/u).should.be.equal(-1)
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>venue-controller test</h1><ul><li class="suite"><h1>create()</h1><ul><li class="test pass fast"><h2>should return created venue<span class="duration">4ms</span></h2><pre><code>async () =&#x3E; {
+            const venue = await controller.create(testVenue)
+            venue._doc.should.containEql(testVenue)
+        }</code></pre></li><li class="suite"><h1>provide the given error</h1><ul><li class="test pass fast"><h2>a nameless venue<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+                const venueWithoutName = Object.assign({}, testVenue)
+                delete venueWithoutName.name
+                try {
+                    const venue = await controller.create(venueWithoutName)
+                    throw &#x27;Expecting NOT this error&#x27;
+                } catch (err) {
+                    err.name.should.be.equal(&#x27;ValidationError&#x27;)
+                    err.message.should.be.match(&#x27;Venue validation failed: name: Path &#x60;name&#x60; is required.&#x27;)
+                }
+            }</code></pre></li><li class="test pass fast"><h2>duplicate venue names<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+                try {
+                    const venue1 = await controller.create(testVenue)
+                    const venue2 = await controller.create(testVenue)
+                    throw &#x27;Expecting NOT this error&#x27;
+                } catch (err) {
+                    err.name.should.be.equal(&#x27;MongoError&#x27;)
+                    err.message.should.be.match(/E11000 duplicate key error collection/)
+                }
+            }</code></pre></li></ul></li></ul></li><li class="suite"><h1>getAll()</h1><ul><li class="test pass fast"><h2>0 count when no entiries<span class="duration">2ms</span></h2><pre><code>async () =&#x3E; {
+            const venues = await controller.getAll()
+            venues.length.should.be.equal(0)
+        }</code></pre></li><li class="test pass fast"><h2>1 count when adding 1<span class="duration">4ms</span></h2><pre><code>async () =&#x3E; {
+            await controller.create(testVenue)
+            const venues = await controller.getAll()
+            venues.length.should.be.equal(1)
+        }</code></pre></li><li class="test pass fast"><h2>2 count when adding 2, and find both in list<span class="duration">10ms</span></h2><pre><code>async () =&#x3E; {
+            const testVenue2 = Object.assign({}, testVenue)
+            testVenue2.name = &#x27;Test Venue 2&#x27;
+            const venue = await controller.create(testVenue)
+            const venue2 = await controller.create(testVenue2)
+            const venues = await controller.getAll()
+            venues.length.should.be.equal(2)
+            venues.should.containDeep([venue._doc, venue2._doc])
+        }</code></pre></li></ul></li><li class="suite"><h1>update()</h1><ul><li class="test pass fast"><h2>same venue with updated values<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            const venueOld = await controller.create(testVenue)
+            const venueNew = Object.assign({}, testVenue)
+            venueNew.name = venueOld.name + &#x27; NEW&#x27;
+            const venueUpdated = await controller.update(venueOld._id, venueNew)
+            venueUpdated._id.toString().should.be.equal(venueOld._doc._id.toString())
+        }</code></pre></li><li class="test pass fast"><h2>error when parsing bad id<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const venueUpdated = await controller.update(&#x27;badId&#x27;, testVenue)
+                throw &#x27;Expecting NOT this error&#x27;
+            } catch (err) {
+                err.name.should.be.equal(&#x27;CastError&#x27;)
+                err.message.should.be.match(&#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Venue&#x22;&#x27;)
+            }
+        }</code></pre></li></ul></li><li class="suite"><h1>delete()</h1><ul><li class="test pass fast"><h2>returns the venue on succesful delete<span class="duration">5ms</span></h2><pre><code>async () =&#x3E; {
+            const venueFirst = await controller.create(testVenue)
+            const venueDeleted = await controller.delete(venueFirst)
+            venueFirst._doc.should.containEql(venueDeleted._doc)
+        }</code></pre></li><li class="test pass fast"><h2>error if invalid id<span class="duration">1ms</span></h2><pre><code>async () =&#x3E; {
+            try {
+                const venue = await controller.delete(&#x27;badId&#x27;, testVenue)
+                throw &#x27;Expecting NOT this error&#x27;
+            } catch (err) {
+                err.name.should.be.equal(&#x27;CastError&#x27;)
+                err.message.should.be.equal(&#x27;Cast to ObjectId failed for value &#x22;badId&#x22; at path &#x22;_id&#x22; for model &#x22;Venue&#x22;&#x27;)
+            }
+        }</code></pre></li></ul></li></ul></li><li class="suite"><h1>venue frontend test</h1><ul><li class="test pass fast"><h2>see input in creating venue page<span class="duration">11ms</span></h2><pre><code>async function () {
+        const res = await request(app)
+            .get(&#x27;/venues/create&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;)
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/id=&#x22;name&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;street&#x22;/).should.be.greaterThan(0)
+        res.text.search(/id=&#x22;zipAndCity&#x22;/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see values when updating venue<span class="duration">14ms</span></h2><pre><code>async function () {
+        const res = await request(app)
+            .get(&#x27;/venues/&#x27; + venue._id)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;)
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/Test Venue/).should.be.greaterThan(0)
+        res.text.search(/Test Address/).should.be.greaterThan(0)
+        res.text.search(/1324 Test City/).should.be.greaterThan(0)
+    }</code></pre></li><li class="test pass fast"><h2>see more than one venue<span class="duration">18ms</span></h2><pre><code>async function () {
+        await controller.create({
+            name: &#x27;New Venue&#x27;,
+            address: {
+                streetAndNumber: &#x27;New Address&#x27;,
+                zipAndCity: &#x27;2233 New City&#x27;
+            }
+        })
+        const res = await request(app)
+            .get(&#x27;/venues/&#x27;)
+            .accept(&#x27;Accept&#x27;, &#x27;application/html&#x27;)
+            .expect(&#x27;Content-Type&#x27;, /html/)
+            .expect(200)
+        res.text.search(/Test Venue/).should.be.greaterThan(0)
+        res.text.search(/New Venue/).should.be.greaterThan(0)
+    }</code></pre></li></ul></li></ul>
+        </div>
+        <script>
+        function hideSuitesWithout(className) {
+    var suites = document.querySelectorAll('#report > .suite');
+
+    for (var i = 0; i < suites.length; i++) {
+        let suite = suites[i];
+
+        var els = suite.getElementsByClassName(className);
+        if (!els.length) {
+            suite.classList.add('hidden');
+        }
+    }
+}
+
+function unhide() {
+    var suites = document.getElementsByClassName('suite hidden');
+
+    while (suites.length) {
+        suites[0].classList.remove('hidden');
+    }
+}
+
+function togglePasses() {
+    var report = document.getElementById('report');
+
+    report.classList.toggle('hide-passes');
+
+    if (report.classList.contains('hide-passes')) {
+        hideSuitesWithout('test fail');
+    } else {
+        unhide();
+    }
+}
+
+document.getElementById('toggle-passes').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    this.classList.toggle('checked');
+
+    togglePasses();
+});
+
+var tests = document.getElementsByClassName('test');
+
+for (var i = 0; i < tests.length; i++) {
+    var elem = tests[i];
+    var head = elem.children[0];
+
+    head.onclick = function () {
+        var code = this.parentElement.children[1];
+        var display = code.style.display;
+
+        if (display && display === 'block') {
+            code.style.display = 'none';
+        } else {
+            code.style.display = 'block';
+        }
+    };
+}
+        </script>
+    </body>
+</html>

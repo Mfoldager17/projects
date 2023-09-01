@@ -1,0 +1,52 @@
+<div class="promoter" id="id-{{ id }}">
+    <img src="/images/expand.png" class="img-expand-collapse" alt="expand" />
+
+    <div class="form-field name">
+        {{#unless name }}
+        <label class="describe" for="name">Stednavn:</label>
+        {{/unless}}
+        <input type="text" name="name" value="{{ name }}" placeholder="navn" id="name"
+        {{#ifneq id 'create-promoter' }} disabled {{/ifneq}} />
+    </div>
+
+    <div class="expanded-content">
+        <span id="errors" class="error-message hidden"></span>
+
+        <div class="form-field streetAndNumber">
+            <label class="describe" for="streetAndNumber">Addresse:</label>
+            <input type="text" name="streetAndNumber" value="{{ address.streetAndNumber }}" placeholder="addresse" id="streetAndNumber"
+            {{#ifneq id 'create-promoter' }} disabled {{/ifneq}} />
+        </div>
+
+        <div class="form-field location">
+            <label class="describe">By og postnummer:</label>
+            <!-- Prettier -->
+            <input type="text" id="zipCodeAndCity" name="zipCodeAndCity" value="{{ address.zipCodeAndCity }}" placeholder="by og postnummer"
+            {{#ifneq id 'create-promoter' }} disabled {{/ifneq}} />
+        </div>
+
+        <div class="form-field contact">
+            <label class="describe" for="attendant">Kontaktoplysninger:</label>
+            <!-- Prettier -->
+            <input type="text" id="attendant" name="attendant" value="{{ contactPerson.name }}" placeholder="kontaktperson"
+            {{#ifneq id 'create-promoter' }} disabled {{/ifneq}} />
+            <!-- Prettier -->
+            <input type="text" id="phoneNr" name="phoneNr" value="{{ contactPerson.phoneNr }}" placeholder="telefon"
+            name="phoneNr" {{#ifneq id 'create-promoter' }} disabled {{/ifneq}} />
+            <!-- Prettier -->
+            <input type="mail" id="mail" name="mail" value="{{ contactPerson.mail }}" placeholder="mail"
+            {{#ifneq id 'create-promoter' }} disabled {{/ifneq}} />
+        </div>
+
+        <div class="expanded-buttons">
+            {{#ifeq id 'create-promoter'}}
+            <button id="submit-or-edit">Gem</button>
+            <button id="cancel-or-delete" hidden>Fortryd</button>
+            {{else}}
+            <button id="submit-or-edit">Rediger</button>
+            <button id="cancel-or-delete">Slet</button>
+            {{/ifeq}}
+        </div>
+    </div>
+</div>
+

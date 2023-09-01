@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="/css/venues.css" />
+<script src="/javascript/venues.js" defer></script>
+
+<h3>Liste af spillesteder</h3>
+
+<table class="venueTable" id="venueTable">
+    <tr>
+        <th>Navn</th>
+        <th>By</th>
+    </tr>
+    {{#each venues}}
+    <tr class="venueList" id="{{_id}}">
+        <td>{{name}}</td>
+        <td>{{address.zipAndCity}}</td>
+    </tr>
+    {{/each}}
+</table>
+
+<button id="create">Opret</button>

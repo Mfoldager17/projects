@@ -1,0 +1,32 @@
+<div class="dropdown">
+	<button id="dropbtn" class="dropbtn">Tilføj datoer</button>
+	<div id="dropdown-dates" class="dropdown-content">
+		<form onsubmit="return false">
+			<div class="grid-container">
+				<div class="grid-item item1">
+					<label>Start dato:</label><br />
+					<input type="date" id="startDate" required />
+				</div>
+				<div class="grid-item item2">
+					<label>Slut dato:</label><br />
+					<input type="date" id="endDate" required />
+				</div>
+				<div class="grid-item item3">
+					<label>Vælg dage:</label><br />
+					<select id="weekDays" multiple required>
+						<option value="1">Mandag</option>
+						<option value="2">Tirsdag</option>
+						<option value="3">Onsdag</option>
+						<option value="4">Torsdag</option>
+						<option value="5">Fredag</option>
+						<option value="6">Lørdag</option>
+						<option value="0">Søndag</option>
+					</select>
+				</div>
+				<div class="grid-item item4">
+					<button id="addDates">Tilføj periode</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

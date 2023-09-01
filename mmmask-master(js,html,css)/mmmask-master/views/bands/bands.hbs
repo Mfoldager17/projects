@@ -1,0 +1,9 @@
+<link rel="stylesheet" type="text/css" href="/css/bands.css" />
+<script src="/javascript/bands.js" defer></script>
+
+<div class="bandlist" id="bandlist">
+   {{#each bands}}
+   <p class="band" id="{{ _id }}">{{ name }}</p>
+   {{/each}}
+</div>
+<button id="create">Opret band</button>

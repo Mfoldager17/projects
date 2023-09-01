@@ -1,0 +1,13 @@
+form * {
+    margin: 5px;
+    margin-bottom: 20px;
+}
+
+td:not(:last-child),
+th:not(:last-child) {
+    width: 200px;
+}
+
+.topthing * {
+    margin: 5px;
+}

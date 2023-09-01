@@ -1,0 +1,253 @@
+/** ======== Variables sitewide */
+:root {
+    --bg-color: #eaeaea;
+    --bg-border-color: #ddeeee;
+    --bg-alt-color: #939393;
+    --bg-blue-color: #4e9af1;
+    --bg-blue-hover-color: #cde1f8e3;
+    --bg-lightblue-color: #4e9af181;
+    --bg-darkerblue-color: rgb(33, 125, 231);
+    --bg-red-color: rgb(236, 74, 78);
+    --box-shadow: 0 0 30px rgba(0, 0, 0, 0.05) inset;
+    /* --box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3); */
+}
+
+.topbar {
+    /* border-bottom: 1px solid grey; */
+    box-shadow: 0px 2px 0px #dedede;
+    /* text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35); */
+}
+
+.topbar img {
+    padding: 20px 0px 20px 40px;
+    width: 15%;
+    height: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.right {
+    padding: 20px 20px 20px 20px;
+    float: right;
+}
+
+/** ======== Generalized style */
+button {
+    background-color: var(--bg-blue-color);
+    padding: 0.5em 2em;
+    border: 0.16em solid rgba(255, 255, 255, 0);
+    border-radius: 0.8em;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    outline: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--bg-darkerblue-color);
+}
+
+button:disabled {
+    background-color: var(--bg-lightblue-color);
+    cursor: default;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin-top: 1vh;
+}
+
+.page {
+    background-color: #ffffff;
+    max-width: 1038px;
+    margin: auto;
+    box-shadow: var(--box-shadow);
+}
+
+/* NAVIGATION */
+nav {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    /* padding: 0px 0; */
+    /* border-bottom: 2px solid var(--bg-alt-color); */
+    /* box-shadow: 0px 2px 0px #dedede; */
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0px;
+}
+nav ul li {
+    display: inline-block;
+}
+nav ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #aaa;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 10px;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+    transition: all 0.5s;
+}
+nav ul li a:hover {
+    color: #555;
+}
+
+nav.stroke ul li a {
+    position: relative;
+    font-size: 13px;
+}
+nav.stroke ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: #333;
+    height: 1px;
+}
+nav.stroke ul li a:hover:after {
+    width: 100%;
+}
+
+.title {
+    border: 1px solid var(--bg-color);
+    padding: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05) inset;
+    text-align-last: center;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.content {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+table {
+    border: solid 1px var(--bg-blue-color);
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 13px Arial, sans-serif;
+}
+
+tr {
+    cursor: pointer;
+}
+
+tr:hover {
+    background-color: var(--bg-blue-hover-color);
+}
+
+th {
+    background-color: var(--bg-blue-color);
+    border: solid 1px var(--bg-border-color);
+    color: #e9fcfc;
+    padding: 10px;
+    text-align: left;
+}
+td {
+    border: solid 1px var(--bg-border-color);
+    color: #333;
+    padding: 10px;
+}
+
+.remove {
+    background-color: rgb(236, 74, 78);
+    text-align: center;
+    padding: 0px;
+}
+
+.remove:hover {
+    background-color: red;
+}
+
+/* Snackbar */
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#submit-response,
+#others-response,
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: var(--bg-blue-color); /* Black background color */
+    color: var(--bg-color);
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    /* font-family: 'Helvetica Neue', sans-serif; */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}

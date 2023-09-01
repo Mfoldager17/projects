@@ -1,0 +1,57 @@
+.bandlist {
+    width: 50vw;
+    display: grid;
+    grid-row-gap: 0px;
+}
+
+.band {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: -1px;
+    padding-left: 20px;
+    height: 50px;
+    width: 400px;
+    background-color: white;
+    border: 1px solid var(--bg-border-color);
+    font-size: 1.1em;
+    font: caption;
+}
+
+.band:hover {
+    background-color: var(--bg-blue-hover-color);
+}
+
+/*	Band show/edit/update */
+
+.form-field {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    grid-row-gap: 15px;
+    margin-bottom: 15px;
+}
+
+#name {
+    font-size: 40px;
+}
+#name:disabled {
+    background: none;
+    outline: none;
+    border: 0px;
+}
+
+#accNr {
+    width: 5ch;
+}
+
+.form-field.invisible {
+    visibility: hidden;
+}
+
+#band-id {
+    display: none;
+}
+
+button {
+    margin: 20px;
+}

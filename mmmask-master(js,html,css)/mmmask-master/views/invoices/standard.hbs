@@ -1,0 +1,81 @@
+<link rel="stylesheet" type="text/css" href="/css/standard-invoice.css" />
+<script src="/javascript/standard.js" defer></script>
+
+<div id="_id" style="display: none">{{ standard._id }}</div>
+<div class="company-details">
+    <div class="content-frame">
+        <h1>Standardform for regning</h1>
+        <div class="dual-form">
+            <label>Titel</label>
+            <input type="text" id="invoiceTitle" value="{{standard.invoiceTitle}}">
+        </div>
+        <h2>Betalingsoplysninger</h2>
+        <div class="payment-details">
+            <div class="bank-details dual-form">
+                <label>Netto dage:</label>
+                <input type="number" id="daysToPay" value="{{standard.paymentDetails.daysToPay}}">
+                <label>Betalingsbeskrivelse:</label>
+                <textarea type="text" id="paymentDetails.bankDetails.description" cols="30" rows="3"
+                    oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{standard.paymentDetails.bankDetails.description}}</textarea>
+                <label>Registeringsnummer:</label>
+                <input type="text" id="paymentDetails.bankDetails.regNo"
+                    value="{{standard.paymentDetails.bankDetails.regNo}}">
+                <label>Kontonummer:</label>
+                <input type="text" id="paymentDetails.bankDetails.accountNo"
+                    value="{{standard.paymentDetails.bankDetails.accountNo}}">
+            </div>
+            <div class="payment-requirements dual-form">
+                <label>Krav ved betaling:</label>
+                <input type="text" id="paymentDetails.paymentRequirement.description"
+                    value="{{standard.paymentDetails.paymentRequirement.description}}">
+            </div>
+        </div>
+        <h2>Agentur oplysninger</h2>
+        <div class="agent-information">
+            <h3>Firma detaljer</h3>
+            <div class="company-details dual-form">
+                <label>Firma navn:</label>
+                <input type="text" id="agentInformation.companyDetails.name" placeholder="Navn"
+                    value="{{standard.agentInformation.companyDetails.name}}">
+                <label>Adresse:</label>
+                <input type="text" id="agentInformation.companyDetails.address.streetAndNumber"
+                    value="{{standard.agentInformation.companyDetails.address.streetAndNumber}}">
+                <label>Postkode og By:</label>
+                <input type="text" id="agentInformation.companyDetails.address.zipAndCity"
+                    value="{{standard.agentInformation.companyDetails.address.zipAndCity}}">
+                <label>Land:</label>
+                <input type="text" id="agentInformation.companyDetails.address.country"
+                    value="{{standard.agentInformation.companyDetails.address.country}}">
+                <label>CVR-nummer:</label>
+                <input type="text" id="standard.agentInformation.companyDetails.CVR"
+                    value="{{standard.agentInformation.companyDetails.CVR}}">
+            </div>
+            <h3>Kontakt information</h3>
+            <div class="contact-information dual-form">
+                <label>Telefon nummer:</label>
+                <input type="text" id="agentInformation.contactInformation.telephone"
+                    value="{{standard.agentInformation.contactInformation.telephone}}">
+                <label>E-mail adresse:</label>
+                <input type="text" id="agentInformation.contactInformation.email"
+                    value="{{standard.agentInformation.contactInformation.email}}">
+                <label>Hjemmeside:</label>
+                <input type="text" id="agentInformation.contactInformation.web"
+                    value="{{standard.agentInformation.contactInformation.web}}">
+            </div>
+            <h3>Bankoplysninger</h3>
+            <div class="bank-details dual-form">
+                <label>Bank:</label>
+                <input type="text" id="agentInformation.bankInformation.bank"
+                    value="{{standard.agentInformation.bankInformation.bank}}">
+                <label>Registeringsnummer:</label>
+                <input type="text" id="agentInformation.bankInformation.accountDetails.regNo"
+                    value="{{standard.agentInformation.bankInformation.accountDetails.regNo}}">
+                <label>Kontonummer:</label>
+                <input type="text" id="agentInformation.bankInformation.accountDetails.accountNo"
+                    value="{{standard.agentInformation.bankInformation.accountDetails.accountNo}}">
+            </div>
+        </div>
+    </div>
+</div>
+<button id="back">Tilbage</button>
+<button id="save-standard">Gem</button>

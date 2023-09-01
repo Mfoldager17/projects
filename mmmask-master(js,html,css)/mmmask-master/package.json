@@ -1,0 +1,46 @@
+{
+    "name": "mmmask",
+    "version": "1.0.0",
+    "description": "eksamensprojekt",
+    "main": "app.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=prod node app.js",
+        "dev": "nodemon app.js",
+        "devLocal": "cross-env NODE_ENV=local nodemon app.js",
+        "test": "cross-env NODE_ENV=test mocha",
+        "testLocal": "cross-env NODE_ENV=localTest mocha",
+        "initDb": "node tools/initDb.js",
+        "initDbLocal": "cross-env NODE_ENV=local node tools/initDb.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alexanderlhc/mmmask.git"
+    },
+    "author": "Mikkel, Mariana, Mathias, Alexander, Søren, Kasper",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/alexanderlhc/mmmask/issues"
+    },
+    "homepage": "https://github.com/alexanderlhc/mmmask#readme",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "connect-mongo": "^3.2.0",
+        "express": "^4.17.1",
+        "express-handlebars": "^5.2.0",
+        "express-session": "^1.17.1",
+        "faker": "^5.1.0",
+        "hbs": "^4.1.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.10.11",
+        "mongoose-auto-increment": "^5.0.1",
+        "supertest-session": "^4.1.0"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "handlebars": "^4.7.6",
+        "mocha": "^8.2.1",
+        "nodemon": "^2.0.6",
+        "should": "^13.2.3",
+        "supertest": "^6.0.1"
+    }
+}

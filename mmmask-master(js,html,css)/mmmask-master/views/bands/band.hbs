@@ -1,0 +1,64 @@
+<link rel="stylesheet" type="text/css" href="/css/band.css" />
+<script src="/javascript/band.js" defer></script>
+
+<h1>{{ band.name }}</h1>
+
+<input type="hidden" name="band-id" value="{{ band._id }}" id="band-id" />
+
+<div class="band">
+
+	<label for="name">Navn:</label>
+	<input type="text" name="name" value="{{ band.name }}" id="name" {{#if band}} disabled {{/if}} />
+
+	<label for="companyName">Firma navn:</label>
+	<input type="text" name="companyName" value="{{ band.companyName }}" id="companyName" {{#if band}} disabled
+		{{/if}} />
+
+	<label for="members">Medlemmer</label>
+	<input type="text" name="members" value="{{ band.members }}" id="members" {{#if band}} disabled {{/if}} />
+
+	<label for="address.streetAndNumber">Vej og nr</label>
+	<input type="text" name="address.streetAndNumber" value="{{ band.address.streetAndNumber }}"
+		id="address.streetAndNumber" {{#if band}} disabled {{/if}} />
+
+	<label for="address.zipCodeAndCity">Postnr og By</label>
+	<input type="text" name="address.zipCodeAndCity" value="{{ band.address.zipCodeAndCity }}"
+		id="address.zipCodeAndCity" {{#if band}} disabled {{/if}} />
+
+	<label for="cvr">CVR-nummer</label>
+	<input type="text" name="cvr" value="{{ band.cvrNr }}" id="cvr" {{#if band}} disabled {{/if}} />
+
+	<label for="accNr">Bankoplysninger</label>
+	<div class="subfields">
+		<input type="text" name="regNr" value="{{ band.accNr }}" id="regNr" {{#if band}} disabled {{/if}} />
+		<input type="text" name="accNr" value="{{ band.regNr }}" id="accNr" {{#if band}} disabled {{/if}} />
+	</div>
+
+	<label for="contactPerson.name">CVR-nummer</label>
+	<input type="text" name="contactPerson.name" value="{{ band.contactPerson.name }}" id="contactPerson.name"
+		{{#if band}} disabled {{/if}} />
+
+	<label for="contactPerson.phoneNr">CVR-nummer</label>
+	<input type="text" name="contactPerson.phoneNr" value="{{ band.contactPerson.phoneNr }}" id="contactPerson.phoneNr"
+		{{#if band}} disabled {{/if}} />
+
+	<label for="contactPerson.mail">CVR-nummer</label>
+	<input type="text" name="contactPerson.mail" value="{{ band.contactPerson.mail }}" id="contactPerson.mail"
+		{{#if band}} disabled {{/if}} />
+
+</div>
+{{#if band }}
+<div class="form-field invisible" id="buttons">
+	<div class="subfields">
+		<button id="back">Tilbage</button>
+		<button id="edit">Ret</button>
+		<button id="submit">Opdater</button>
+		<button id="delete">Slet</button>
+	</div>
+	{{else}}
+	<div class="form-field">
+		<button id="back">Tilbage</button>
+		<button id="submit">Opret</button>
+	</div>
+	{{/if}}
+</div>

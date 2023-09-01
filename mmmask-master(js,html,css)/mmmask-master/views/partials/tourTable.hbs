@@ -1,0 +1,46 @@
+<table id="tourDaysTable">
+		<thead>
+			<tr>
+					<th>Dato</th>
+					<th>Sted</th>
+					<th>By</th>
+					<th>Kapacitet</th>
+					<th>Aftale</th>
+					<th>Noter</th>
+					<th>Slet</th>
+			</tr>
+			<tr id="tourDayRow" style="display:none">
+					<td class="date"> </td>
+					<td class="venue" ></td>
+					<td class="city" ></td>
+					<td class="capacity" ></td>
+					<td class="agreement" ></td>
+					<td class="notes" contenteditable></td>
+					<td> <button class="remove">Slet</button> </td>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each tour.tourDays}}
+			<tr data-id="{{_id}}" {{#if concert }}data-concertId="{{concert._id}}"{{/if}}>
+					{{#if concert }}
+						<div id="concertId" style="display: none">{{ concert._id }}</div>
+					{{/if}}
+					<td class="date">
+						{{concert.time.date}} {{concert.time.start}}
+						{{date}}
+					</td>
+					<td class="venue" >{{concert.venue.name}}<br>{{concert.venue.address.streetAndNumber}}</td>
+					<td class="city" >{{concert.venue.address.zipCodeAndCity}}</td>
+					<td class="capacity" >{{concert.capacity}}</td>
+					<td class="agreement" >{{agreement}}</td>
+					<td class="notes" contenteditable>{{note}}</td>
+					<td>
+						{{#if concert}}
+						<button class="edit">Rediger</button>
+						{{/if}}
+						<button class="remove">Slet</button>
+					</td>
+			</tr>
+			{{/each}}
+		</tbody>
+</table>

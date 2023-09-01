@@ -1,0 +1,306 @@
+<link rel="stylesheet" href="/css/contract.css" />
+<script src="/javascript/contract.js" defer></script>
+
+<div id="_id" style="display: none">{{ contract._id }}</div>
+
+<div>
+    <button class="no-print" id="backButton">Tilbage</button>
+    <button class="no-print" id="createButton">Opret</button>
+    <button class="no-print" id="editButton">Ret</button>
+    <button class="no-print" id="saveButton">Gem</button>
+    {{#if contract}}
+    <button class="no-print" id="createInvoice">Opret Faktura</button>
+    {{/if}}
+    <button class="no-print" id="printButton" onClick="window.print()">Print</button>
+
+    <select id="concertSelect">
+        <option value="">Vælg concert</option>
+        {{#each concerts}}
+        '
+        <option class="concerts" value="{{@index}}">{{ venue.time.date }} {{ band.name }}</option>
+        '
+        {{/each}}
+    </select>
+</div>
+
+<div id="contract-info">
+    <div class="printAdress">
+        <div><img src="/images/acbMusic.png" /></div>
+        <p>Krogvej 2</p>
+        <p>5700 Svenborg</p>
+        <p>CVR: 36246081</p>
+    </div>
+    <div class="form border">
+        <div>
+            <label>Kontraktnummer</label>
+            <input type="text" id="contractNumber" placeholder="Kontraktnr" value="{{ contract.contractNumber }}" />
+        </div>
+        <div>
+            <label>Kontraktdato</label>
+            <input type="text" id="contractDate" placeholder="Kontrakt dato" value="{{ contract.contractDate }}" />
+        </div>
+    </div>
+
+    <div class="printInfo">
+        <p>
+            Denne kontrakt udgør en bindende aftale om, at Kontrahent I engagerer Kontrahent II til en koncertoptræden.
+            Aftalen er indgået af ACB Music på vegne af Kontrahent II.
+        </p>
+    </div>
+
+    <div class="form border">
+        <label class="bottom-border">ARRANGØR - Kontrahent I</label>
+        <label class="bottom-border">ARTIST - Kontrahent II</label>
+        <p id="concert.promoter.name" class="promoter">
+            {{ contract.concert.promoter.name }}
+        </p>
+        <p id="concert.band.name" class="band">
+            {{ contract.concert.band.name }}
+        </p>
+        <p id="concert.promoter.address.streetAndNumber" class="promoter">
+            {{ contract.concert.promoter.address.streetAndNumber }}
+        </p>
+        <p id="concert.band.address.streetAndNumber" class="band">
+            {{ contract.concert.band.address.streetAndNumber }}
+        </p>
+        <p id="concert.promoter.address.zipCodeAndCity" class="promoter">
+            {{ contract.concert.promoter.address.zipCodeAndCity }}
+        </p>
+        <p id="concert.band.address.zipCodeAndCity" class="band">
+            {{ contract.concert.band.address.zipCodeAndCity }}
+        </p>
+        <p id="concert.promoter.contactPerson.name" class="promoter">
+            {{ contract.concert.promoter.contactPerson.name }}
+        </p>
+        <p id="concert.band.contactPerson.name" class="band">{{ contract.concert.band.contactPerson.name }}</p>
+        <p id="concert.promoter.contactPerson.phoneNr" class="promoter">
+            {{ contract.concert.promoter.contactPerson.phoneNr }}
+        </p>
+        <p id="concert.band.contactPerson.phoneNr" class="band">
+            {{ contract.concert.band.contactPerson.phoneNr }}
+        </p>
+        <p id="concert.promoter.contactPerson.mail" class="promoter">
+            {{ contract.concert.promoter.contactPerson.mail }}
+        </p>
+        <p id="concert.band.contactPerson.mail" class="band">{{ contract.concert.band.contactPerson.mail }}</p>
+    </div>
+
+    <div class="form border">
+        <label class="bottom-border">STED: </label>
+        <label class="bottom-border">TID: </label>
+        <p id="concert.venue.name" class="concert">{{ contract.concert.venue.name }}</p>
+        <p id="concert.time.date" class="concert">{{ contract.concert.time.date }}</p>
+        <p id="concert.venue.address.streetAndNumber" class="concert">
+            {{ contract.concert.venue.address.streetAndNumber }}
+        </p>
+        <p id="concert.time.start" class="concert">{{ contract.concert.time.start }}</p>
+        <p id="concert.venue.address.zipCodeAndCity" class="concert">
+            {{ contract.concert.venue.address.zipCodeAndCity }}
+        </p>
+        <p id="concert.time.duration" class="concert">{{ contract.concert.time.duration }}</p>
+    </div>
+
+    <div class="form border">
+        <label class="bottom-border">KAPACITET: </label>
+        <label class="bottom-border">BILLETPRIS: </label>
+        <p id="concert.capacity" class="concert">{{ contract.concert.capacity }}</p>
+
+        <input type="text" id="ticketPrice" placeholder="Billetpris" value="{{ contract.ticketPrice }}" />
+    </div>
+    <div class="printPayment">
+        <p>
+            NB, læs venligst nedenstående rubrik omkring betaling igennem en ekstra gange for at sikre, at
+            betalingsproceduren efter koncerten finder sted på korrekt vis – blot for at minimere unødig administration
+            for alle parter. Eventuelle tvivlsspørgsmål rettes til ACB Music. ☺☺☺
+        </p>
+    </div>
+
+    <div class="border">
+        <label>BETALINGSOPLYSNINGER:</label>
+        <div class="form-single top-border">
+            <textarea
+                id="paymentDetails"
+                cols="30"
+                rows="3"
+                placeholder="Betalingsoplysninger"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                >{{ contract.paymentDetails }}</textarea
+            >
+        </div>
+    </div>
+
+    <div class="border">
+        <label>ØKONOMI</label>
+        <div class="form top-border">
+            <p>Nettohonorar:</p>
+            <input
+                type="text"
+                id="invoice.economy.netFees"
+                placeholder="Nettohonorar"
+                value="{{ contract.invoice.economy.netFees }}"
+            />
+            <p>Produktionsomkostninger:</p>
+            <input
+                type="text"
+                id="invoice.economy.productionCosts"
+                placeholder="Produktionsomkostninger"
+                value="{{ contract.invoice.economy.productionCosts }}"
+            />
+            <p>Provision:</p>
+            <input
+                type="text"
+                id="invoice.economy.commision"
+                placeholder="Provision"
+                value="{{ contract.invoice.economy.commision }}"
+            />
+            <p class="top-border-small">Aftalt pris:</p>
+            <input
+                type="text"
+                id="invoice.economy.negotiatedPrice"
+                class="top-border-small"
+                placeholder="Aftalt pris"
+                value="{{ contract.invoice.economy.negotiatedPrice }}"
+            />
+        </div>
+    </div>
+
+    <div class="border">
+        <label>AFREGNING - ARTIST:</label>
+        <div class="form top-border">
+            <p>Nettohonorar</p>
+            <input
+                type="text"
+                id="invoice.settlementArtist.netFees"
+                placeholder="Nettohonorar"
+                value="{{ contract.invoice.settlementArtist.netFees }}"
+            />
+            <p>Produktionsomkostninger</p>
+            <input
+                type="text"
+                id="invoice.settlementArtist.productionCosts"
+                placeholder="Produktionsomkostninger"
+                value="{{ contract.invoice.settlementArtist.productionCosts }}"
+            />
+            <p>+ moms</p>
+            <input
+                type="text"
+                id="invoice.settlementArtist.plusVat"
+                placeholder="+ moms"
+                value="{{ contract.invoice.settlementArtist.plusVat }}"
+            />
+            <p class="top-border-small">I alt til afregning til Artisten:</p>
+            <input
+                type="text"
+                id="invoice.settlementArtist.totalSettlement"
+                class="top-border-small"
+                placeholder="I alt til afregning til Artisten"
+                value="{{ contract.invoice.settlementArtist.totalSettlement }}"
+            />
+        </div>
+    </div>
+
+    <div class="border">
+        <label>AFREGNING - AGENTUR:</label>
+        <div class="form top-border">
+            <p>Provision</p>
+            <input
+                type="text"
+                id="invoice.settlementAgency.commision"
+                placeholder="Provision"
+                value="{{ contract.invoice.settlementAgency.commision }}"
+            />
+            <p>+ moms</p>
+            <input
+                type="text"
+                id="invoice.settlementAgency.plusVat"
+                placeholder="+ moms"
+                value="{{ contract.invoice.settlementAgency.plusVat }}"
+            />
+            <p class="top-border-small">I alt til afregning til ABC Music:</p>
+            <input
+                type="text"
+                id="invoice.settlementAgency.totalSettlement"
+                class="top-border-small"
+                placeholder="I alt til afregning til ABC Music:"
+                value="{{ contract.invoice.settlementAgency.totalSettlement }}"
+            />
+        </div>
+    </div>
+
+    <div class="form border">
+        <label>AFREGNING - TOTAL:</label>
+
+        <input
+            type="text"
+            id="totalSettlement"
+            placeholder="Afregning - total"
+            value="{{ contract.totalSettlement }}"
+        />
+    </div>
+
+    <div class="printInfo">
+        <p>
+            Nettohonoraret overføres og indberettes ud fra oplysningerne herunder. Provisionen opkræves separat ved at
+            Agenturet fremsender faktura efter endt koncert.
+        </p>
+    </div>
+
+    <div class="border">
+        <label>ARTIST - INDBERETNINGSOPLYSNINGER</label>
+        <div class="form top-border">
+            <p>Firma:</p>
+            <p id="concert.band.companyName" class="band">{{ contract.concert.band.companyName }}</p>
+            <p>Adresse:</p>
+            <p id="concert.band.address.streetAndNumber2" class="band">
+                {{ contract.concert.band.address.streetAndNumber }}
+            </p>
+            <p>Postnummer & By:</p>
+            <p id="concert.band.address.zipCodeAndCity2" class="band">
+                {{ contract.concert.band.address.zipCodeAndCity }}
+            </p>
+            <p>CVR:</p>
+            <p id="concert.band.cvrNr" class="band">{{ contract.concert.band.cvrNr }}</p>
+        </div>
+    </div>
+
+    <div class="border">
+        <label>ARTIST - KONTOOPLYSNINGER</label>
+        <div class="form top-border">
+            <p>Reg. Nr.</p>
+            <p id="concert.band.regNr" class="band">{{ contract.concert.band.regNr }}</p>
+            <p>Kontonr.</p>
+            <p id="concert.band.accNr" class="band">{{ contract.concert.band.accNr }}</p>
+        </div>
+    </div>
+
+    <div class="border">
+        <label>ANDET:</label>
+        <div class="form-single top-border">
+            <textarea
+                id="other"
+                cols="30"
+                rows="3"
+                placeholder="Andet"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                >{{ contract.other }}</textarea
+            >
+        </div>
+    </div>
+
+    <div class="printSignature">
+        <p class="declaration">
+            Kontrahenterne erklærer med deres underskrift at være myndige og at have gjort sig bekendt med de i
+            kontrakten anførte betingelser.
+        </p>
+        <br />
+        <div class="form signature">
+            <p>Dato:</p>
+            <p>Dato:</p>
+            <p class="line">__________________________</p>
+            <p class="line">__________________________</p>
+            <p>Kontrahent I (ARRANGØR)</p>
+            <p>Kontrahent II (FOR ARTISTEN)</p>
+        </div>
+    </div>
+</div>
+{{> shareurl }}

@@ -1,0 +1,22 @@
+.band {
+    padding: 2px;
+    display: grid;
+    grid-template-columns: 150px 250px;
+}
+
+input {
+    margin: 5px;
+}
+
+#regNr {
+    width: 35px;
+    /* display: inline-block; */
+}
+
+#accNr {
+    width: 175px;
+}
+
+button {
+    margin: 10px;
+}

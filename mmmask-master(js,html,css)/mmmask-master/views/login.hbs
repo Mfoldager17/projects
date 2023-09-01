@@ -1,0 +1,35 @@
+<script src="/javascript/user.js" defer></script>
+<link rel="stylesheet" type="text/css" href="css/user.css">
+
+{{#unless authenticated}}
+<form onsubmit="return false">
+	<div class="form-group">
+		<label for="name">Navn:</label>
+		<input type="text" id="name" placeholder="Indtast navn">
+	</div>
+
+	<div class="form-group">
+		<label for="password">Adgangskode:</label>
+		<input type="password" id="password" placeholder="Indtast password">
+	</div>
+
+	<div class="form-group">
+		<button id="login">Log ind</button>&emsp;
+	</div>
+</form>
+
+<div class="form-error">
+	<span id="noName" class="noName hidden"></span>
+	<span id="noPassword" class="noPassword hidden">Password mangler</span>
+</div>
+{{/unless}}
+{{#if authenticated}}
+<button id="logout">Log ud</button>&emsp;
+{{/if}}
+
+{{#if error}}
+<div class="authMissing">
+	<span>Du er ikke logget ind</span>
+	<span>Log venligst ind og prøv igen</span>
+</div>
+{{/if}}
