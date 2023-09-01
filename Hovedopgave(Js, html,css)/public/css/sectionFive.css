@@ -1,0 +1,31 @@
+section:nth-of-type(5){
+    background-color: rgb(118, 118, 224);
+}
+
+.headline{
+    display: flex;
+    justify-content: space-evenly;
+    color: #333;
+}
+
+#mysvg {
+    margin-bottom: 10px;
+    width: 60%;
+    background: radial-gradient(ellipse at center, #fefefe 0%, #cbeeff 100%);
+    touch-action: none;
+    border: 5px solid rgb(218, 218, 218);
+}
+
+#infoDiv {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+textarea {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    width: 98%;
+    resize: none;
+}

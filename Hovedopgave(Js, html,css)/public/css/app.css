@@ -1,0 +1,173 @@
+/*Used to style items that infect the whole page*/
+
+body, html{
+  background-color: rgb(150, 194, 252);
+}
+
+h2{
+  text-align: center;
+}
+
+#headline {
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 50px;
+  font-weight: 500;
+  border-bottom: solid 1px;
+}
+
+textarea {
+  border-radius: 10px;
+}
+
+input, select{
+  border-radius: 10px;
+  height: 20px;
+}
+
+.containerMaster{
+  margin: 0;
+  margin-top: 2%;
+  margin-left: 1.2%;
+  margin-right: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 0.2fr 0.2fr;
+  grid-gap: 20px;
+}
+
+section {
+  width: 600px;
+  margin-bottom: 10px;
+  border: solid 1px;
+  border-color: rgb(38, 73, 139);
+  border-radius: 1%;
+}
+
+.wrapper{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.wrapper .box{
+  padding: 3px;
+  padding-bottom: 5px;
+  margin-right: 5%;
+}
+
+.wrapper .box input{
+  width: 100%;
+}
+
+.input-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+button, input[type="button"] {
+  border-radius: 10px;
+  height: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 150px; /* Set a default minimum width */
+    max-width: 350px; 
+    margin-left: -165px; /* Divide value of min-width by 2 */
+    background-color: #00292b; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 15px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 52%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 6.5s;
+    animation: fadein 0.5s, fadeout 0.5s 6.5s;
+  }
+  
+/*
+Responsiv grid
+*/
+@media (max-width: 1900px) {
+  .containerMaster {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.2fr 0.2fr;
+  }
+  section {
+      margin-left: 10%;
+  }
+  section:nth-of-type(6), section:nth-of-type(5) {
+      margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .containerMaster {
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.2fr;
+      }
+  section {
+      margin-left: 220px;
+  }
+  table {
+      margin-bottom: 50px;
+  }
+  section:nth-of-type(6) {
+      margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  #submitBtn {
+      margin-bottom: 2%;
+  }
+  section {
+      margin-left: 200px;
+  }
+
+}
+@media (max-width: 900px) {
+  section {
+      margin-left: 0px;
+  }
+
+}
+
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }

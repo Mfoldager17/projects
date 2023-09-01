@@ -1,0 +1,75 @@
+.coordinatesContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: 200px;
+    overflow-y: scroll;
+    border: solid 1px;
+    border-radius: 1%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.coordinatesContainer h4 {
+    margin-left: 12px;
+}
+
+.coordinatesContainer input {
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+#plusBtn, #minusBtn{
+    margin-left: 85px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    border:solid 1px;
+    text-align: center;
+    background-color: white;
+}
+
+.clearAndDeleteContainer {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+}
+
+#deleteBtn {
+    background-color: red;
+}
+
+#clearBtn, #deleteBtn{
+    margin-left: 2%;
+    width: 70px;
+    height: 30px;
+    font-weight: 700;
+}
+
+#submitBtn {
+    margin-top: 4%;
+    margin-left: 2%;
+    width: 70px;
+    height: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+#convertTo2DArray {
+    height: 30px;
+    margin-left: 360px;
+}
+
+.searchContainer {
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+section:nth-of-type(1){
+    background-color: cornflowerblue;
+}
+
+

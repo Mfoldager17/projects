@@ -1,0 +1,23 @@
+section:nth-of-type(3){
+    background-color: rgb(78, 78, 243);
+}
+
+#mysvgDrawProfile {
+    width: 60%;
+    background: radial-gradient(ellipse at center, #fefefe 0%, #cbeeff 100%);
+    touch-action: none;
+    border: 5px solid rgb(218, 218, 218);
+  }
+
+  .btnSvgDrawButtons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1%;
+    margin-right: 12.5%;
+    margin-left: 12.5%;
+    margin-bottom: 40px;
+}
+
+.btnSvgDrawButtons button {
+  width: 100px;
+}

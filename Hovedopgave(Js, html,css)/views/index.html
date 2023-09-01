@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="css/app.css"> <!-- styling for the whole app -->
+    <script src="javascript/app.js" defer></script> <!-- Methods used for the whole app -->
+
+    <link rel="stylesheet" type="text/css" href="css/sectionOne.css"> <!-- styling for section one -->
+    <script src="javascript/sectionOne.js" defer></script>
+
+    <script src="javascript/index.js" defer></script>
+
+    <link rel="stylesheet" type="text/css" href="css/sectionTwo.css"> <!-- styling for section two -->
+
+    <link rel="stylesheet" type="text/css" href="css/sectionThree.css"> <!-- styling for section three -->
+
+    <link rel="stylesheet" type="text/css" href="css/sectionFour.css"> <!-- styling for section four -->
+
+    <link rel="stylesheet" type="text/css" href="css/sectionFive.css"> <!-- styling for section five -->
+
+    <link rel="stylesheet" type="text/css" href="css/sectionSix.css"> <!-- styling for section six -->
+
+
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <h1 id="headline">UT TRANSPORT</h1>
+    </center>
+    <div class="containerMaster">
+        <section>
+            <div id="formDiv" class="container">
+                <h2>Definer Transport</h2>
+                <div class="searchContainer">
+                    <input id="searchInput" type="text" placeholder="Søg på UT nummer">
+                    <input type="button" id="searchBtn" value="Søg" onclick="searchForProfile()">
+                </div>
+                <div class="clearAndDeleteContainer">
+                    <input style="display: none;" id="clearBtn" type="button" value="Clear"
+                        onclick="clearInputFields()">
+                    <input style="display: none;" id="deleteBtn" type="button" value="Slet" onclick="deleteProfile()">
+                </div>
+                <form id="form" action="" onsubmit="return false">
+                    <div class="wrapper">
+                        <div class="box">
+                            <label>UT nummer</label>
+                            <input id="utNumberInput" type="text" name="utNummer" required>
+                        </div>
+                        <div class="box">
+                            <label>Dato/Init</label>
+                            <input id="datoInput" type="date" min="2021-11-2" name="fnames" required>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="box">
+                            <label>Godsart</label>
+                            <input id="godsartInput" type="text" name="Godsart" required>
+                        </div>
+                        <div class="box">
+                            <label>Vognlitra</label>
+                            <input id="vognlitraInput" type="text" name="Vongnlitra" required>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="box">
+                            <label>Gods Længde</label>
+                            <input id="godslengthInput" type="number" name="Vongnlitra" required>
+                        </div>
+                        <div class="box">
+                            <label>Akselafstand</label>
+                            <input id="axleDistance" type="number" name="Akselafstand" required>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="box">
+                            <label>Akselafstand i bogie </label>
+                            <input id="axleDistanceInBoogieInput" type="number" name="Akselafstand i bogie " required>
+                        </div>
+                        <div class="box">
+                            <label>Akselantal</label>
+                            <input id="axleCountInput" type="number" name="Akselantal" required>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="box">
+                            <label>Indv. afstand fra aksel</label>
+                            <input id="insideDistanceFromAxelToBoogie" type="number" required>
+                        </div>
+                        <div class="box">
+                            <label>Uddv. afstand fra aksel</label>
+                            <input id="outsideDistanceFromAxelToBoogie" type="number" required>
+                        </div>
+                    </div>
+                    <div class="coordinatesContainer">
+                        <div id="x-axis">
+                            <h4>Afstand fra vognmidte
+                                <select onchange="makeInputFields(value)" id="inputCount">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </h4>
+                            <div id="xInputs">
+                            </div>
+                            <input onclick="createOneInputField()" style="display: none;" id="plusBtn" type="button"
+                                value="+">
+                        </div>
+                        <div id="y-axis">
+                            <h4>Højde over SO</h4>
+                            <div id="yInputs">
+                            </div>
+                            <input onclick="removeOneInputField()" style="display: none;" id="minusBtn" type="button"
+                                value="-">
+                        </div>
+                    </div>
+                    <input type="submit" id="submitBtn" value="Opret">
+                    <input type="button" id="convertTo2DArray" value="Indtegn koordinater">
+                </form>
+            </div>
+        </section>
+
+        <section class="sektion 2">
+            <div class="graphicProfileOnly">
+                <h2>Profilvogn</h2>
+                <div class="svgSektion">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="mysvgProfileOnly" viewBox="0 0 2000 2000"
+                        preserveAspectRatio="xMidYmid meet">
+                        <line x1="1000" y1="0" x2="1000" y2="2000"
+                            style="stroke: rgb(7, 7, 7); stroke-dasharray: 40 40;"></line>
+                        <line x1="0" y1="1680" x2="2000" y2="1680"
+                            style="stroke: rgb(20, 20, 20); stroke-dasharray: 40 40;"></line>
+                        <line x1="655" y1="1620" x2="1400" y2="1620"
+                            style="stroke: rgb(87, 8, 8); stroke-dasharray: 40 40;"></line>
+                    </svg>
+                </div>
+                <div id="output">
+                    <strong id="strong">koordinater:</strong> <span id="svgX"></span> <span id="svgY"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="sektion 3">
+            <div>
+                <div class="graphicDrawProfile">
+                    <h2> Tegn halvsideprofil</h2>
+                    <div class="svgSektion">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="mysvgDrawProfile" viewBox="0 0 2000 2000"
+                            preserveAspectRatio="xMidYmid meet">
+                            <line x1="50" y1="0" x2="50" y2="2000"
+                                style="stroke: rgb(7, 0, 0); stroke-dasharray: 30 30;"></line>
+                            <line x1="0" y1="1680" x2="2000" y2="1680"
+                                style="stroke: rgb(0, 0, 0); stroke-dasharray: 30 30;"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div id="output">
+                    <strong id="strong">koordinater:</strong> <span id="svgXDrawProfile"></span> <span
+                        id="svgYDrawProfile"></span>
+                </div>
+                <div class="btnSvgDrawButtons">
+                    <button type="button" id="btnBeginDraw">Start profil</button>
+                    <button type="button" id="btnEndDraw">Afslut profil</button>
+                    <button type="button" id="btnErase">Fortryd</button>
+                    <button type="button" id="btnEraseAll">Slet alt</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="contact-right">
+                <h2>Midlertidig titel</h2>
+                <form>
+                    <div class="outerline">
+                        <div class="input-row">
+                            <label>Identifikation</label>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label> Strækning</label>
+                                <input type="text" style="width: 30px;">
+                                <label> - </label>
+                                <input type="text" style="width: 30px;">
+                            </div>
+                            <div class="input-group">
+                                <label> Spor</label>
+                                <input type="text" style="width: 50px;">
+                                <label> Kilometer</label>
+                                <input type="text" style="width: 50px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outerline">
+                        <div class="input-row">
+                            <label>Dato/initialer</label>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label> Oprettelse</label>
+                                <input type="text" style="width: 60px;">
+                                <label> / </label>
+                                <input type="text" style="width: 40px;">
+                            </div>
+                            <div class="input-group">
+                                <label> Reviderede</label>
+                                <input type="text" style="width: 60px;">
+                                <label> / </label>
+                                <input type="text" style="width: 40px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outerline">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label> Transport undersøges</label>
+                            </div>
+                            <div class="input-group">
+                                <label style="margin-right: 80px;"> Behandlet</label>
+                            </div>
+                            <div class="input-group">
+                                <label style="margin-right: 22px;"> Dispensation</label>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <input type="radio">
+                                <label> Ja</label>
+                                <input type="radio">
+                                <label> nej</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="radio">
+                                <label> Ja</label>
+                                <input type="radio">
+                                <label> nej</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="radio">
+                                <label> Ja</label>
+                                <input type="radio">
+                                <label> nej</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outerline">
+                        <div class="input-row">
+                            <label>Genstandsbetegnelse</label>
+                            <select style="width: 300px; margin: 5px; height: 25px;" id="scroll">
+                                <option value="Test">Test</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                        </div>
+                    </div>
+
+                    <div class="outerline">
+                        <div class="input-row">
+                            <label>Teskt til transport tilladelse</label>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <input type="text" style="width: 400px">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outerline">
+                        <div class="input-row">
+                            <label>Notat</label>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <textarea name="" id="" cols="52" rows="7"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="sektion 5">
+            <div class="headline">
+                <h1>Profilvogn</h1>
+                <h1 id="RouteHeadlineRight">ingen rute valgt</h1>
+            </div>
+            <div class="svgSektion">
+                <svg xmlns="http://www.w3.org/2000/svg" id="mysvg" viewBox="0 0 2000 2000"
+                    preserveAspectRatio="xMidYmid meet">
+                    <line x1="1000" y1="0" x2="1000" y2="2000" style="stroke: rgb(7, 7, 7); stroke-dasharray: 40 40;">
+                    </line>
+                    <line x1="0" y1="1680" x2="2000" y2="1680"
+                        style="stroke: rgb(20, 20, 20); stroke-dasharray: 40 40;"></line>
+                    <line x1="655" y1="1620" x2="1400" y2="1620" style="stroke: rgb(87, 8, 8); stroke-dasharray: 40 40;"
+                        id="Har du id?"></line>
+                </svg>
+            </div>
+            <div id="infoDiv">
+                <h3>Info stillestående</h3>
+                <h3>Info fullspeed</h3>
+                <textarea id="infoAreaStill" cols="30" rows="5" readonly="true"></textarea>
+                <textarea id="infoAreaFullspeed" cols="30" rows="5" readonly="true"></textarea>
+            </div>
+        </section>
+
+        <section class="sektion 6">
+            <div class="contact-right">
+                <h2>Definer transportstrækning</h2>
+                <form>
+                    <div class="outline1">
+                        <div class="outline2">
+                            <h2>objekt profiler</h2>
+                            <div class="outline3">
+                            </div>
+                        </div>
+
+                        <div class="outline2">
+                            <h2>Restriktioner</h2>
+                        </div>
+
+                        <div class="outline2">
+                            <div class="outline3">
+                                <button type="button" id="btnBack1">
+                                    < </button>
+                                        <button type="button" id="btnNext1"> > </button>
+                                        <button type="button" id="btnBackAll">
+                                            << </button>
+                                                <button type="button" id="btnNextAll"> >> </button>
+                            </div>
+                        </div>
+
+                        <div class="outline2">
+                            <div>
+                                <input type="radio">
+                                <label for=""> Ingen</label>
+                            </div>
+                            <div>
+                                <input type="radio">
+                                <label for=""> Forbikøres med max 5 km/t</label>
+                            </div>
+                            <div>
+                                <input type="radio">
+                                <label for=""> Stop og rangeres</label>
+                            </div>
+                            <div>
+                                <input type="radio">
+                                <label for=""> Forbud</label>
+                            </div>
+                            <div>
+                                <input type="radio">
+                                <label for=""> Sporafstand</label>
+                            </div>
+                        </div>
+                        <div class="testklasse">
+                            <div>
+                                <h3>Indlæs profil og rute</h3>
+                            </div>
+                            <div>
+                                <button type="button" id="btnIndlæsknap"> Indlæs demoprofil</button>
+                                <button type="button" id="btnUseDrawProfile"> Indlæs tegnede profil</button>
+                            </div>
+                            <div>
+                                <input type="radio" name="navn1" id="rute1"> Rute1
+                                <input type="radio" name="navn1" id="rute2"> Rute2
+                            </div>
+                            <div class="simulateContainer">
+                                <button type="button" id="btnSimuler">Simuler rute</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </div>
+    <div id="snackbar">Some text some message..</div>
+</body>
+
+</html>

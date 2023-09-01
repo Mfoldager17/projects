@@ -1,0 +1,13 @@
+section:nth-of-type(4){ /* This section doesn't have any function */
+    background-color: cornflowerblue;
+}
+
+.outerline{
+    border: solid 1px;
+    margin: 10px;
+  }
+  
+  
+  .outerline label, input{
+    margin: 5px;
+  }
